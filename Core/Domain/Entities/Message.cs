@@ -2,7 +2,7 @@
 
 namespace Domain.Entities
 {
-    public class Message : AuditableEntity, IAuditableEntity
+    public class Message : AuditableEntity, IAuditableEntity, IEntity
     {
         public int Id { get; set; }
         public string Content { get; set; }

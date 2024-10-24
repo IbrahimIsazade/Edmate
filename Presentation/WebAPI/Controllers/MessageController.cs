@@ -1,5 +1,6 @@
 ﻿using Application.Models.common;
 using Application.Modules.MessageModule.Command.MessageAddCommand;
+using Application.Modules.MessageModule.Command.MessageDeleteCommand;
 using Application.Modules.MessageModule.Command.MessageEditCommand;
 using Application.Modules.MessageModule.Queries.GetAllQuery;
 using Application.Modules.MessageModule.Queries.GetByIdQuery;
@@ -43,6 +44,15 @@ namespace WebAPI.Controllers
             request.Id = id;
             var res = await mediator.Send(request);
             var response = ApiResponse.Success(res, StatusCodes.Status200OK);
+            return Ok(response);
+        }
+
+        [HttpDelete("{id:int:min(1)}")]
+        public async Task<IActionResult> Delete([FromQuery] MessageDeleteCommandRequest request, int id)
+        {
+            request.Id = id;
+            await mediator.Send(request);
+            var response = ApiResponse.Success(StatusCodes.Status204NoContent, "Deleted");
             return Ok(response);
         }
     }

@@ -1,11 +1,12 @@
-﻿using Domain.Entities;
+﻿using Application.Services;
+using Domain.Entities;
 using Domain.Exceptions;
 using MediatR;
 using Repositories;
 
 namespace Application.Modules.MessageModule.Command.MessageAddCommand
 {
-    internal class MessageAddCommandRequestHandler(IMessageRepository messageRepository) : IRequestHandler<MessageAddCommandRequest, Message>
+    internal class MessageAddCommandRequestHandler(IMessageRepository messageRepository, IEntityService entityService) : IRequestHandler<MessageAddCommandRequest, Message>
     {
         public async Task<Message> Handle(MessageAddCommandRequest request, CancellationToken cancellationToken)
         {
@@ -14,17 +15,7 @@ namespace Application.Modules.MessageModule.Command.MessageAddCommand
                 throw new BadRequestException("Message");
             }
 
-            var message = new Message()
-            {
-                Content = request.Content,
-                SenderId = request.SenderId,
-                RecieverId = request.RecieverId
-            };
-
-            await messageRepository.AddAsync(message, cancellationToken);
-            await messageRepository.SaveAsync(cancellationToken);
-            
-            return message;
+            return await entityService.AddAsync(request, messageRepository, cancellationToken);
         }
     }
 }
