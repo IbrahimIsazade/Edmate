@@ -1,7 +1,7 @@
 ﻿using Domain.Entities.common;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-namespace Persistence.Configurations
+namespace Persistence.Configurations.common
 {
     public static class ConfigurationExtension
     {

@@ -1,16 +1,11 @@
 ﻿using Domain.Entities;
-using Domain.Entities.Membership;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Persistence.Configurations.common;
 
 namespace Persistence.Configurations
 {
-	class MessageEntityTypeConfiguration : IEntityTypeConfiguration<Message>
+    class MessageEntityTypeConfiguration : IEntityTypeConfiguration<Message>
 	{
 		public void Configure(EntityTypeBuilder<Message> builder)
 		{

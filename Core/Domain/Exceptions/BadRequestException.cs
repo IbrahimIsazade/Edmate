@@ -2,7 +2,10 @@
 {
     public class BadRequestException : Exception
     {
-        public BadRequestException(string entityName)
-            : base(string.Format("Bad Request", entityName)) { }
+        public Dictionary<string, IEnumerable<string>> Errors { get; private set; }
+
+        public BadRequestException(string message, Dictionary<string, IEnumerable<string>> errors)
+            : base(message) => this.Errors = errors;
+
     }
 }

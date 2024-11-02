@@ -12,7 +12,10 @@ namespace Application.Modules.MessageModule.Command.MessageAddCommand
         {
             if (String.IsNullOrWhiteSpace(request.Content))
             {
-                throw new BadRequestException("Message");
+                throw new BadRequestException("BADREG", new Dictionary<string, IEnumerable<string>>
+                {
+                    ["UserName"] = ["UserName cannot be empty"]
+                });
             }
 
             return await entityService.AddAsync(request, messageRepository, cancellationToken);

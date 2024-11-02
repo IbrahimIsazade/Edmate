@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Persistence.Contexts;
 using System.Reflection;
 using System.Text;
+using WebAPI.Middleware;
 
 
 namespace WebAPI
@@ -38,7 +38,6 @@ namespace WebAPI
                     opt.MigrationsHistoryTable("MigrationHistory");
                 });
             });
-
 
             builder.Services.AddControllers(cfg => { });
             builder.Services.AddEndpointsApiExplorer();
@@ -114,6 +113,7 @@ namespace WebAPI
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.UseMiddleware<GlobalExceptionMiddleware>();
+            app.UseDbTransaction();
 
             //app.UseStaticFiles(new StaticFileOptions
             //{

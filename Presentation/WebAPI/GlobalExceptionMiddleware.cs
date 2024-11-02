@@ -26,20 +26,20 @@ namespace WebAPI
             {
                 var response = ex switch
                 {
-                    //UserNameOrPasswordIncorrectException or
-                    //AccountLockoutException or
-                    //UnverifiedEmailException or
-                    //UnverifiedPhoneException => ApiResponse.Fail(StatusCodes.Status401Unauthorized, ex.Message),
+                    UserNameOrPasswordIncorrectException or
+                    AccountLockoutException or
+                    UnverifiedEmailException or
+                    UnverifiedPhoneException => ApiResponse.Fail(StatusCodes.Status401Unauthorized, ex.Message),
 
                     NotFoundException nfEx => ApiResponse.Fail(StatusCodes.Status404NotFound, nfEx.Message),
                     BadRequestException brEx => ApiResponse.Fail(StatusCodes.Status400BadRequest, brEx.Message),
-                    //UnauthorizedException => ApiResponse.Fail(StatusCodes.Status401Unauthorized, ex.Message),
+                    UnauthorizedException => ApiResponse.Fail(StatusCodes.Status401Unauthorized, ex.Message),
                     _ => ApiResponse.Fail(StatusCodes.Status500InternalServerError, "Server Error")
                 };
 
                 context.Response.StatusCode = response.Code;
 
-                logger.LogError(ex, "Error Handled: StatusCode=@Code, Errors=@Errors", response.Code, response.Errors);
+                logger.LogError(ex, "Error Handled: StatusCode={0}, Errors={1}", response.Code, response.Errors);
 
                 await context.Response.WriteAsJsonAsync(response, options: new JsonSerializerOptions
                 {

@@ -9,4 +9,5 @@ namespace Persistence.Repositories
     {
         public MessageRepository(DbContext db) : base(db) { }
     }
+
 }
