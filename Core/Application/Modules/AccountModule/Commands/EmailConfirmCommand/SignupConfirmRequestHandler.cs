@@ -1,5 +1,5 @@
-﻿using MediatR;
-using Services.common;
+﻿using Application.Services;
+using MediatR;
 
 namespace Application.Modules.AccountModule.Commands.EmailConfirmCommand
 {

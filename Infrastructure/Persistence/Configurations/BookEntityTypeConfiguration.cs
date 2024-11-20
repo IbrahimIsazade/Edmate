@@ -5,24 +5,23 @@ using Persistence.Configurations.common;
 
 namespace Persistence.Configurations
 {
-    class CourseEntityTypeConfiguration : IEntityTypeConfiguration<Course>
+
+    class BookEntityTypeConfiguration : IEntityTypeConfiguration<Book>
 	{
-		public void Configure(EntityTypeBuilder<Course> builder)
+		public void Configure(EntityTypeBuilder<Book> builder)
 		{
 			builder.Property(m => m.Id).HasColumnType("int").UseIdentityColumn(1, 1);
 			builder.Property(m => m.Title).HasColumnType("nvarchar").HasMaxLength(50).IsRequired();
 			builder.Property(m => m.Description).HasColumnType("nvarchar(max)").IsRequired();
 			builder.Property(m => m.CategoryId).HasColumnType("int").IsRequired();
-			builder.Property(m => m.MentorId).HasColumnType("int").IsRequired();
-			builder.Property(m => m.SubjectId).HasColumnType("int").IsRequired();
-			builder.Property(m => m.Rating).HasColumnType("decimal").HasPrecision(18, 3).IsRequired();
+			builder.Property(m => m.PublisherId).HasColumnType("int").IsRequired();
 			builder.Property(m => m.ThumbnailPath).HasColumnType("varchar").HasMaxLength(50).IsRequired();
-			builder.Property(m => m.Duration).HasColumnType("int").IsRequired();
+			builder.Property(m => m.PdfPath).HasColumnType("varchar").HasMaxLength(50).IsRequired();
+			builder.Property(m => m.AproximateReading).HasColumnType("int").IsRequired();
 
 			builder.ConfigureAuditable();
-
 			builder.HasKey(m => m.Id);
-			builder.ToTable("Courses");
+			builder.ToTable("Books");
 
 			builder.HasOne<Category>()
 				.WithMany()
@@ -33,7 +32,7 @@ namespace Persistence.Configurations
 			builder.HasOne<Mentor>()
 				.WithMany()
 				.HasPrincipalKey(m => m.Id)
-				.HasForeignKey(m => m.MentorId)
+				.HasForeignKey(m => m.PublisherId)
 				.OnDelete(DeleteBehavior.NoAction);
 		}
 	}

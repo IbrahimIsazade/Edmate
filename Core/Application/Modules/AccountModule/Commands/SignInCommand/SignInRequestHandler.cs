@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Domain.Exceptions;
-using Services.common;
+using Application.Services;
 
 namespace Application.Modules.AccountModule.Commands.SignInCommand
 {

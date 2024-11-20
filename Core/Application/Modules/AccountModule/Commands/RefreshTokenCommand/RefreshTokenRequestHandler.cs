@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Membership;
+﻿using Application.Services;
+using Domain.Entities.Membership;
 using Domain.Exceptions;
 using Domain.StableModels;
 using MediatR;
@@ -7,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
-using Services.common;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 

@@ -1,4 +1,5 @@
-﻿using Domain.Configurations;
+﻿using Application.Services;
+using Domain.Configurations;
 using Microsoft.Extensions.Options;
 using Services.Registration;
 using System.Security.Cryptography;

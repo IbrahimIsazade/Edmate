@@ -1,4 +1,5 @@
 using Application;
+using Domain.Entities.Membership;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -23,19 +24,11 @@ namespace WebAPI
 
             builder.Host.UseServiceProviderFactory(new IoCFactory());
 
-            builder.Services.AddDbContext<DataContext>(cfg =>
+            builder.Services.AddDataContext(cfg =>
             {
                 cfg.UseSqlServer(builder.Configuration.GetConnectionString("cString"), opt =>
                 {
-                    opt.MigrationsHistoryTable("MigrationHistory");
-                });
-            });
-
-            builder.Services.AddDbContext<DbContext>(cfg =>
-            {
-                cfg.UseSqlServer(builder.Configuration.GetConnectionString("cString"), opt =>
-                {
-                    opt.MigrationsHistoryTable("MigrationHistory");
+                    opt.MigrationsHistoryTable("MigrationsHistory");
                 });
             });
 
@@ -58,7 +51,7 @@ namespace WebAPI
                     cfg.Password.RequiredLength = 3;
                     cfg.Password.RequireNonAlphanumeric = false;
                     cfg.Password.RequireUppercase = false;
-                    cfg.Password.RequireLowercase = false;
+                    cfg.Password.RequireLowercase = false; 
                     cfg.Password.RequireDigit = false;
                 }
             });
@@ -66,7 +59,6 @@ namespace WebAPI
             builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddCors(cfg => cfg.AddPolicy("allowAll", p => p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
-
 
 
             builder.Services.AddAuthentication(cfg =>
