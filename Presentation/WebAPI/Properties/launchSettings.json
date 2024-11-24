@@ -6,6 +6,9 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
+        "SUPERADMIN_USER": "Ibrahim",
+        "SUPERADMIN_EMAIL": "ibrahimisazade264@gmail.com",
+        "SUPERADMIN_PASSWORD": "ibrahim264",
         "JWT__KEY": "88b0ba2aaff3daa419917a9a1c85732570c4771b",
         "JWT__ISSUER": "api.custom.az",
         "JWT__AUDIENCE": "api.custom.az",
@@ -20,6 +23,9 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
+        "SUPERADMIN_USER": "Ibrahim",
+        "SUPERADMIN_EMAIL": "ibrahimisazade264@gmail.com",
+        "SUPERADMIN_PASSWORD": "ibrahim264",
         "JWT__KEY": "88b0ba2aaff3daa419917a9a1c85732570c4771b",
         "JWT__ISSUER": "api.custom.az",
         "JWT__AUDIENCE": "api.custom.az",

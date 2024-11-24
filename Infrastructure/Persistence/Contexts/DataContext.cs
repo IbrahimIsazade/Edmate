@@ -7,7 +7,7 @@ namespace Persistence.Contexts
 {
     public class DataContext : IdentityDbContext<CustomUser, CustomRole, int, CustomUserClaim, CustomUserRole, CustomUserLogin, CustomRoleClaim, CustomUserToken>
     {
-        public DataContext(DbContextOptions options) : base(options) { }
+        public DataContext(DbContextOptions options) : base(options)  {}
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

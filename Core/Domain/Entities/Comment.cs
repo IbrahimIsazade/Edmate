@@ -5,9 +5,9 @@ namespace Domain.Entities
     public class Comment : AuditableEntity, IEntity, IAuditableEntity
     {
         public int Id { get; set; }
-        public required string Content { get; set; }
-        public required int CourseId { get; set; }
-        public required int UserId { get; set; }
+        public string Content { get; set; }
+        public int CourseId { get; set; }
+        public int UserId { get; set; } // use usermanager
         public int? CommentId { get; set; }
     }
 }

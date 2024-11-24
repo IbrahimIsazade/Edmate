@@ -5,7 +5,6 @@ using Persistence.Configurations.common;
 
 namespace Persistence.Configurations
 {
-
     class BookEntityTypeConfiguration : IEntityTypeConfiguration<Book>
 	{
 		public void Configure(EntityTypeBuilder<Book> builder)

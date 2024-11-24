@@ -64,6 +64,48 @@ namespace Persistence.Migrations
                     b.ToTable("Attachments", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Award", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .IsRequired()
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Awards", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.BlockedUser", b =>
                 {
                     b.Property<int>("BlockerId")
@@ -75,6 +117,107 @@ namespace Persistence.Migrations
                     b.HasKey("BlockerId", "BlockedId");
 
                     b.ToTable("BlockedUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Book", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AproximateReading")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .IsRequired()
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PdfPath")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar");
+
+                    b.Property<int>("PublisherId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ThumbnailPath")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("PublisherId");
+
+                    b.ToTable("Books", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .IsRequired()
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Comment", b =>
@@ -185,7 +328,53 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("MentorId");
+
                     b.ToTable("Courses", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Feature", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .IsRequired()
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Features", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Follower", b =>
@@ -422,6 +611,94 @@ namespace Persistence.Migrations
                     b.ToTable("UserTokens", "Membership");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Mentor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Bio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CoverPath")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .IsRequired()
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar");
+
+                    b.Property<int>("Followers")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Following")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("IsVerified")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar");
+
+                    b.Property<int>("Likes")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<int?>("ModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("ProfilePath")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Mentors", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.Message", b =>
                 {
                     b.Property<int>("Id")
@@ -613,11 +890,59 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Entities.Award", b =>
+                {
+                    b.HasOne("Domain.Entities.Course", null)
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Book", b =>
+                {
+                    b.HasOne("Domain.Entities.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Mentor", null)
+                        .WithMany()
+                        .HasForeignKey("PublisherId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Domain.Entities.Comment", b =>
                 {
                     b.HasOne("Domain.Entities.Course", null)
                         .WithMany()
                         .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Course", b =>
+                {
+                    b.HasOne("Domain.Entities.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Mentor", null)
+                        .WithMany()
+                        .HasForeignKey("MentorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Feature", b =>
+                {
+                    b.HasOne("Domain.Entities.Book", null)
+                        .WithMany()
+                        .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
@@ -670,6 +995,15 @@ namespace Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Mentor", b =>
+                {
+                    b.HasOne("Domain.Entities.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 

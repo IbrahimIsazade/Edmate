@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Persistence.Contexts
 {
     public static class DataContextInjections
-    {
+    {   
         public static IServiceCollection AddDataContext(this IServiceCollection services,
             Action<DbContextOptionsBuilder>? optionsAction = null,
             ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
@@ -17,7 +17,7 @@ namespace Persistence.Contexts
             services.AddIdentityCore<CustomUser>()
                 .AddRoles<CustomRole>()
                 .AddEntityFrameworkStores<DataContext>()
-                .AddDefaultTokenProviders()
+                //.AddDefaultTokenProviders()
                 .AddErrorDescriber<ErrorDescriber>()
                 .AddUserManager<UserManager<CustomUser>>()
                 .AddSignInManager<SignInManager<CustomUser>>()

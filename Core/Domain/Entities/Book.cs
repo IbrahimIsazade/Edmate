@@ -5,12 +5,12 @@ namespace Domain.Entities
     public class Book : AuditableEntity, IEntity, IAuditableEntity
     {
         public int Id { get; set; }
-        public required string Title { get; set; }
-        public required string Description { get; set; }
-        public required int CategoryId { get; set; }
-        public required int PublisherId { get; set; }
-        public required string ThumbnailPath { get; set; }
-        public required string PdfPath { get; set; }
-        public required string AproximateReading { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public int CategoryId { get; set; }
+        public int PublisherId { get; set; } // Mentor (you should use IMentorRepository)
+        public string ThumbnailPath { get; set; }
+        public string PdfPath { get; set; }
+        public int AproximateReading { get; set; }
     }
 }

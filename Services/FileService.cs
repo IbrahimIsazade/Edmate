@@ -17,6 +17,7 @@ namespace Services
 
             var extension = Path.GetExtension(file.FileName);
             var fileName = $"{Guid.NewGuid()}{extension}";
+            Console.WriteLine($"EVOIRMENT CONTENT ROOT PATH -> {env.ContentRootPath}");
             string fullPath = Path.Combine(env.ContentRootPath, "wwwroot", "Uploads", fileName);
 
             using (var fs = new FileStream(fullPath, FileMode.Create, FileAccess.ReadWrite))
