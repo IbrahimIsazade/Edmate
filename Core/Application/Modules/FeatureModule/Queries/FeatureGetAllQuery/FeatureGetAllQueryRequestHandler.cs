@@ -5,11 +5,11 @@ using Repositories;
 
 namespace Application.Modules.FeatureModule.Commands.GetAllQuery
 {
-    internal class FeatureGetAllQueryRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<FeatureGetAllQueryRequest, IEnumerable<Award>>
+    internal class FeatureGetAllQueryRequestHandler(IFeatureRepository featureRepository) : IRequestHandler<FeatureGetAllQueryRequest, IEnumerable<Feature>>
     {
-        public async Task<IEnumerable<Award>> Handle(FeatureGetAllQueryRequest request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Feature>> Handle(FeatureGetAllQueryRequest request, CancellationToken cancellationToken)
         {
-            // Logic here
+            return featureRepository.GetAll().ToList();
         }
     }
 }

@@ -3,8 +3,9 @@ using MediatR;
 
 namespace Application.Modules.FeatureModule.Commands.AddCommand
 {
-    public class FeatureAddCommandRequest : IRequest<Award>
+    public class FeatureAddCommandRequest : IRequest<Feature>
     {
-        public int Name { get; set; }
+        public required string Title { get; set; }
+        public required int BookId { get; set; }
     }
 }

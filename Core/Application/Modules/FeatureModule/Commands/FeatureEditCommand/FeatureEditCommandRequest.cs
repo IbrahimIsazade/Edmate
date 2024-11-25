@@ -3,8 +3,10 @@ using MediatR;
 
 namespace Application.Modules.FeatureModule.Commands.EditCommand
 {
-    public class FeatureEditCommandRequest : IRequest<Award>
+    public class FeatureEditCommandRequest : IRequest<Feature>
     {
-        public int Id { get; set; } public int Name { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public int BookId { get; set; }
     }
 }

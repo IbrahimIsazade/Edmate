@@ -1,15 +1,14 @@
-using Application.Services;
 using Domain.Entities;
 using MediatR;
 using Repositories;
 
 namespace Application.Modules.FeatureModule.Commands.GetByIdQuery
 {
-    internal class FeatureGetByIdQueryRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<FeatureGetByIdQueryRequest, void>
+    internal class FeatureGetByIdQueryRequestHandler(IFeatureRepository featureRepository) : IRequestHandler<FeatureGetByIdQueryRequest, Feature>
     {
-        public async Task<void> Handle(FeatureGetByIdQueryRequest request, CancellationToken cancellationToken)
+        public async Task<Feature> Handle(FeatureGetByIdQueryRequest request, CancellationToken cancellationToken)
         {
-            // Logic here
+            return await featureRepository.GetAsync(m => m.Id == request.Id);
         }
     }
 }
