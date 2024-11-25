@@ -1,7 +1,7 @@
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Modules.CourseModule.Commands.DeleteCommand
+namespace Application.Modules.CourseModule.Commands.CourseDeleteCommand
 {
     public class CourseDeleteCommandRequest : IRequest
     {

@@ -4,9 +4,9 @@ using Repositories;
 
 namespace Application.Modules.AwardModule.Commands.AwardDeleteCommand
 {
-    internal class AwardDeleteRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<AwardDeleteRequest>
+    internal class AwardDeleteCommandRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<AwardDeleteCommandRequest>
     {
-        public async Task Handle(AwardDeleteRequest request, CancellationToken cancellationToken)
+        public async Task Handle(AwardDeleteCommandRequest request, CancellationToken cancellationToken)
         {
             await entityService.Delete(request, request.Id, awardRepository, cancellationToken);
         }

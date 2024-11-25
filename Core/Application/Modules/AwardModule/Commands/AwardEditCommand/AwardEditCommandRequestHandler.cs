@@ -5,9 +5,9 @@ using Repositories;
 
 namespace Application.Modules.AwardModule.Commands.AwardEditCommand
 {
-    internal class AwardEditRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<AwardEditRequest, Award>
+    internal class AwardEditCommandRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<AwardEditCommandRequest, Award>
     {
-        public async Task<Award> Handle(AwardEditRequest request, CancellationToken cancellationToken)
+        public async Task<Award> Handle(AwardEditCommandRequest request, CancellationToken cancellationToken)
         {
             return await entityService.Edit(request, request.Id, awardRepository, cancellationToken);
         }

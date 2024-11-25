@@ -3,13 +3,13 @@ using Domain.Entities;
 using MediatR;
 using Repositories;
 
-namespace Application.Modules.CourseModule.Commands.DeleteCommand
+namespace Application.Modules.CourseModule.Commands.CourseDeleteCommand
 {
-    internal class CourseDeleteCommandRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<CourseDeleteCommandRequest, void>
+    internal class CourseDeleteCommandRequestHandler(ICourseRepository courseRepository, IEntityService entityService) : IRequestHandler<CourseDeleteCommandRequest>
     {
-        public async Task<void> Handle(CourseDeleteCommandRequest request, CancellationToken cancellationToken)
+        public async Task Handle(CourseDeleteCommandRequest request, CancellationToken cancellationToken)
         {
-            // Logic here
+            await entityService.Delete(request, request.Id, courseRepository, cancellationToken);
         }
     }
 }

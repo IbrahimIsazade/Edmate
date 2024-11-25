@@ -6,9 +6,9 @@ using Repositories;
 
 namespace Application.Modules.AttachmentModule.Commands.AttachmentEditCommand
 {
-    internal class AttachmentEditRequestHandler(IAttachmentRepository attachmentRepository, ICourseRepository courseRepository, IFileService fileService) : IRequestHandler<AttachmentEditRequest, Attachment>
+    internal class AttachmentEditCommandRequestHandler(IAttachmentRepository attachmentRepository, ICourseRepository courseRepository, IFileService fileService) : IRequestHandler<AttachmentEditCommandRequest, Attachment>
     {
-        public async Task<Attachment> Handle(AttachmentEditRequest request, CancellationToken cancellationToken)
+        public async Task<Attachment> Handle(AttachmentEditCommandRequest request, CancellationToken cancellationToken)
         {
             var attachment = await attachmentRepository.GetAsync(m => m.Id == request.Id);
 

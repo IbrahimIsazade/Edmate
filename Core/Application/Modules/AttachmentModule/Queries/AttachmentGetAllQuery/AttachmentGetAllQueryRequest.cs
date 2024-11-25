@@ -3,5 +3,5 @@ using MediatR;
 
 namespace Application.Modules.AttachmentModule.Queries.AttachmentGetAllQuery
 {
-    public class AttachmentGetAllRequest : IRequest<IEnumerable<Attachment>> { }
+    public class AttachmentGetAllQueryRequest : IRequest<IEnumerable<Attachment>> { }
 }

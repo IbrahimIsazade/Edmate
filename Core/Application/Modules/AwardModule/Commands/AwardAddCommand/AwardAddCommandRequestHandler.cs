@@ -5,9 +5,9 @@ using Repositories;
 
 namespace Application.Modules.AwardModule.Commands.AwardAddCommand
 {
-    internal class AwardAddRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<AwardAddRequest, Award>
+    internal class AwardAddCommandRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<AwardAddCommandRequest, Award>
     {
-        public async Task<Award> Handle(AwardAddRequest request, CancellationToken cancellationToken)
+        public async Task<Award> Handle(AwardAddCommandRequest request, CancellationToken cancellationToken)
         {
             return await entityService.AddAsync(request, awardRepository, cancellationToken);
         }

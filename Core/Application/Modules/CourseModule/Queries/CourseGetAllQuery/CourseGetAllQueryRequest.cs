@@ -1,10 +1,7 @@
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Modules.CourseModule.Commands.GetAllQuery
+namespace Application.Modules.CourseModule.Queries.CourseGetAllQuery
 {
-    public class CourseGetAllQueryRequest : IRequest<IEnumerable<Award>>
-    {
-        // properties if they are needed
-    }
+    public class CourseGetAllQueryRequest : IRequest<IEnumerable<Course>> { }
 }

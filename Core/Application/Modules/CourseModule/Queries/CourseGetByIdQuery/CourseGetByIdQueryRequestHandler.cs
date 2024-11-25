@@ -1,15 +1,14 @@
-using Application.Services;
 using Domain.Entities;
 using MediatR;
 using Repositories;
 
-namespace Application.Modules.CourseModule.Commands.GetByIdQuery
+namespace Application.Modules.CourseModule.Queries.CourseGetByIdQuery
 {
-    internal class CourseGetByIdQueryRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<CourseGetByIdQueryRequest, void>
+    internal class CourseGetByIdQueryRequestHandler(ICourseRepository courseRepository) : IRequestHandler<CourseGetByIdQueryRequest, Course>
     {
-        public async Task<void> Handle(CourseGetByIdQueryRequest request, CancellationToken cancellationToken)
+        public async Task<Course> Handle(CourseGetByIdQueryRequest request, CancellationToken cancellationToken)
         {
-            // Logic here
+            return await courseRepository.GetAsync(m => m.Id == request.Id);
         }
     }
 }
