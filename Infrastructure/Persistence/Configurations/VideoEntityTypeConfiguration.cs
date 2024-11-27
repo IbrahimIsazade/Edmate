@@ -14,7 +14,7 @@ namespace Persistence.Configurations
             builder.Property(m => m.Title).HasColumnType("nvarchar").HasMaxLength(50).IsRequired();
             builder.Property(m => m.VideoPath).HasColumnType("varchar").HasMaxLength(50).IsRequired();
             builder.Property(m => m.CourseId).HasColumnType("int").IsRequired();
-            builder.Property(m => m.CoursePartId).HasColumnType("int").IsRequired();
+            builder.Property(m => m.OrderNumber).HasColumnType("int").IsRequired();
             builder.Property(m => m.Duration).HasColumnType("int").IsRequired();
 
             builder.ConfigureAuditable();

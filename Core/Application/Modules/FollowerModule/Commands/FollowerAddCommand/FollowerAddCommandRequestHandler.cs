@@ -1,15 +1,23 @@
-using Application.Services;
 using Domain.Entities;
 using MediatR;
 using Repositories;
 
 namespace Application.Modules.FollowerModule.Commands.AddCommand
 {
-    internal class FollowerAddCommandRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<FollowerAddCommandRequest, Award>
+    internal class FollowerAddCommandRequestHandler(IFollowerRepository followerRepository) : IRequestHandler<FollowerAddCommandRequest, Follower>
     {
-        public async Task<Award> Handle(FollowerAddCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Follower> Handle(FollowerAddCommandRequest request, CancellationToken cancellationToken)
         {
-            return await entityService.AddAsync(request, awardRepository, cancellationToken);
+            var follower = new Follower() 
+            { 
+                FollowedId = request.FollowedId,
+                FollowingId = request.FollowingId
+            };
+
+            await followerRepository.AddAsync(follower, cancellationToken);
+            await followerRepository.SaveAsync(cancellationToken);
+
+            return follower;
         }
     }
 }

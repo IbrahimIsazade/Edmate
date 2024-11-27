@@ -8,7 +8,7 @@ namespace Domain.Entities
         public required string Title { get; set; }
         public required string VideoPath { get; set; }
         public required int CourseId { get; set; }
-        public required int CoursePartId { get; set; }
+        public required int OrderNumber { get; set; }
         public required int Duration { get; set; } // means minutes. FE: 200 -> 3h 20m
     }
 }

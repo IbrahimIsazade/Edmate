@@ -3,8 +3,9 @@ using MediatR;
 
 namespace Application.Modules.FollowerModule.Commands.GetByIdQuery
 {
-    public class FollowerGetByIdQueryRequest : IRequest
+    public class FollowerGetByIdQueryRequest : IRequest<Follower>
     {
-        public int Id { get; set; }
+        public int FollowingId { get; set; }
+        public int FollowedId { get; set; }
     }
 }

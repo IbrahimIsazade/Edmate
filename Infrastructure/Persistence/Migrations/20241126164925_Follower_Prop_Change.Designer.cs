@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241126164925_Follower_Prop_Change")]
+    partial class Follower_Prop_Change
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -836,6 +839,9 @@ namespace Persistence.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CoursePartId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("CreatedAt")
                         .IsRequired()
                         .HasColumnType("datetime");
@@ -856,9 +862,6 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")

@@ -5,11 +5,11 @@ using Repositories;
 
 namespace Application.Modules.FollowerModule.Commands.GetByIdQuery
 {
-    internal class FollowerGetByIdQueryRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<FollowerGetByIdQueryRequest, void>
+    internal class FollowerGetByIdQueryRequestHandler(IFollowerRepository followerRepository) : IRequestHandler<FollowerGetByIdQueryRequest, Follower>
     {
-        public async Task<void> Handle(FollowerGetByIdQueryRequest request, CancellationToken cancellationToken)
+        public async Task<Follower> Handle(FollowerGetByIdQueryRequest request, CancellationToken cancellationToken)
         {
-            // Logic here
+            return await followerRepository.GetAsync(m => m.FollowingId == request.FollowedId && m.FollowedId == request.FollowedId);
         }
     }
 }

@@ -9,9 +9,9 @@ namespace Persistence.Configurations
 		public void Configure(EntityTypeBuilder<Follower> builder)
 		{
 			builder.Property(m => m.FollowedId).HasColumnType("int").IsRequired();
-            builder.Property(m => m.FollowedId).HasColumnType("int").IsRequired();
+            builder.Property(m => m.FollowingId).HasColumnType("int").IsRequired();
 
-			builder.HasKey(m => new { m.FollowerId, m.FollowedId });
+			builder.HasKey(m => new { m.FollowingId, m.FollowedId });
 			builder.ToTable("Followers");
 		}
 	}

@@ -5,11 +5,11 @@ using Repositories;
 
 namespace Application.Modules.FollowerModule.Commands.GetAllQuery
 {
-    internal class FollowerGetAllQueryRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<FollowerGetAllQueryRequest, IEnumerable<Award>>
+    internal class FollowerGetAllQueryRequestHandler(IFollowerRepository followerRepository) : IRequestHandler<FollowerGetAllQueryRequest, IEnumerable<Follower>>
     {
-        public async Task<IEnumerable<Award>> Handle(FollowerGetAllQueryRequest request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Follower>> Handle(FollowerGetAllQueryRequest request, CancellationToken cancellationToken)
         {
-            // Logic here
+            return followerRepository.GetAll().ToList();
         }
     }
 }

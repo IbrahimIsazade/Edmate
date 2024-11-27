@@ -5,11 +5,14 @@ using Repositories;
 
 namespace Application.Modules.FollowerModule.Commands.DeleteCommand
 {
-    internal class FollowerDeleteCommandRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<FollowerDeleteCommandRequest, void>
+    internal class FollowerDeleteCommandRequestHandler(IFollowerRepository followerRepository) : IRequestHandler<FollowerDeleteCommandRequest>
     {
-        public async Task<void> Handle(FollowerDeleteCommandRequest request, CancellationToken cancellationToken)
+        public async Task Handle(FollowerDeleteCommandRequest request, CancellationToken cancellationToken)
         {
-            // Logic here
+            var follower = await followerRepository.GetAsync(m => m.FollowingId == request.FollowedId && m.FollowedId == request.FollowedId);
+
+            followerRepository.Delete(follower);
+            await followerRepository.SaveAsync(cancellationToken);
         }
     }
 }

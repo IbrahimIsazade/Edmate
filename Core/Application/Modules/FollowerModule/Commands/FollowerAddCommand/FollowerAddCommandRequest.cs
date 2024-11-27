@@ -3,8 +3,9 @@ using MediatR;
 
 namespace Application.Modules.FollowerModule.Commands.AddCommand
 {
-    public class FollowerAddCommandRequest : IRequest<Award>
+    public class FollowerAddCommandRequest : IRequest<Follower>
     {
-        public int Name { get; set; }
+        public int FollowingId { get; set; }
+        public int FollowedId { get; set; }
     }
 }
