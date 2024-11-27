@@ -5,11 +5,11 @@ using Repositories;
 
 namespace Application.Modules.MentorModule.Commands.DeleteCommand
 {
-    internal class MentorDeleteCommandRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<MentorDeleteCommandRequest, void>
+    internal class MentorDeleteCommandRequestHandler(IMentorRepository mentorRepository, IEntityService entityService) : IRequestHandler<MentorDeleteCommandRequest>
     {
-        public async Task<void> Handle(MentorDeleteCommandRequest request, CancellationToken cancellationToken)
+        public async Task Handle(MentorDeleteCommandRequest request, CancellationToken cancellationToken)
         {
-            // Logic here
+            await entityService.Delete(request, request.Id, mentorRepository, cancellationToken);
         }
     }
 }

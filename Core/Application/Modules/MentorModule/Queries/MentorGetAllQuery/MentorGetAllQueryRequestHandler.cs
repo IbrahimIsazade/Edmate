@@ -5,11 +5,11 @@ using Repositories;
 
 namespace Application.Modules.MentorModule.Commands.GetAllQuery
 {
-    internal class MentorGetAllQueryRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<MentorGetAllQueryRequest, IEnumerable<Award>>
+    internal class MentorGetAllQueryRequestHandler(IMentorRepository mentorRepository) : IRequestHandler<MentorGetAllQueryRequest, IEnumerable<Mentor>>
     {
-        public async Task<IEnumerable<Award>> Handle(MentorGetAllQueryRequest request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Mentor>> Handle(MentorGetAllQueryRequest request, CancellationToken cancellationToken)
         {
-            // Logic here
+            return mentorRepository.GetAll().ToList();
         }
     }
 }
