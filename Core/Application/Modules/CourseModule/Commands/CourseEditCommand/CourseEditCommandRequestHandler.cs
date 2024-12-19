@@ -1,5 +1,4 @@
-using Domain.Exceptions
-
+using Domain.Exceptions;
 using Domain.Entities;
 using MediatR;
 using Repositories;
@@ -7,7 +6,10 @@ using Application.Services;
 
 namespace Application.Modules.CourseModule.Commands.CourseEditCommand
 {
-    internal class CourseEditCommandRequestHandler(ICourseRepository courseRepository, ICategoryRepository categoryRepository, IFileService fileService) : IRequestHandler<CourseEditCommandRequest, Course>
+    internal class CourseEditCommandRequestHandler(
+        ICourseRepository courseRepository,
+        ICategoryRepository categoryRepository,
+        IFileService fileService) : IRequestHandler<CourseEditCommandRequest, Course>
     {
         public async Task<Course> Handle(CourseEditCommandRequest request, CancellationToken cancellationToken)
         {

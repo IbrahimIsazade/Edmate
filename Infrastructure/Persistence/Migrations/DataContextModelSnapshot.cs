@@ -48,7 +48,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("FilePath")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(100)
                         .HasColumnType("varchar");
 
                     b.Property<DateTime?>("ModifiedAt")
@@ -56,6 +56,11 @@ namespace Persistence.Migrations
 
                     b.Property<int?>("ModifiedBy")
                         .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar");
 
                     b.HasKey("Id");
 
@@ -158,7 +163,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("PdfPath")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(100)
                         .HasColumnType("varchar");
 
                     b.Property<int>("PublisherId")
@@ -166,7 +171,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("ThumbnailPath")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(100)
                         .HasColumnType("varchar");
 
                     b.Property<string>("Title")
@@ -315,7 +320,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("ThumbnailPath")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(100)
                         .HasColumnType("varchar");
 
                     b.Property<string>("Title")
@@ -625,7 +630,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("CoverPath")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(100)
                         .HasColumnType("varchar");
 
                     b.Property<DateTime?>("CreatedAt")
@@ -686,7 +691,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("ProfilePath")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(100)
                         .HasColumnType("varchar");
 
                     b.HasKey("Id");
@@ -815,7 +820,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("ProfileImagePath")
                         .IsRequired()
-                        .HasMaxLength(80)
+                        .HasMaxLength(100)
                         .HasColumnType("varchar");
 
                     b.HasKey("Id");
@@ -868,7 +873,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("VideoPath")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(70)
                         .HasColumnType("varchar");
 
                     b.HasKey("Id");

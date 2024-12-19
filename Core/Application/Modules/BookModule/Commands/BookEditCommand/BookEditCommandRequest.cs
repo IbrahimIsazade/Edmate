@@ -11,6 +11,5 @@ namespace Application.Modules.BookModule.Commands.BookEditCommand
         public string Description { get; set; }
         public int CategoryId { get; set; }
         public IFormFile? Thumbnail { get; set; }
-        public IFormFile? Pdf { get; set; }
     }
 }

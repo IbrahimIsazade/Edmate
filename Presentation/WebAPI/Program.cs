@@ -1,10 +1,14 @@
 using Application;
+using Domain.Configurations;
 using Domain.Entities.Membership;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Persistence.Contexts;
 using System.Reflection;
@@ -32,7 +36,14 @@ namespace WebAPI
                 });
             });
 
-            builder.Services.AddControllers(cfg => { });
+            builder.Services.AddControllers(cfg => 
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+
+                cfg.Filters.Add(new AuthorizeFilter(policy));
+            });
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<IApplicationReference>());
@@ -70,7 +81,6 @@ namespace WebAPI
                 cfg.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, cfg =>
             {
-
                 cfg.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -85,12 +95,27 @@ namespace WebAPI
                 };
             });
 
+            builder.Services.Configure<EmailConfiguration>(cfg => builder.Configuration.GetSection(cfg.GetType().Name).Bind(cfg));
+
             builder.Services.AddAuthorization(cfg =>
             {
                 foreach (var policy in ClaimsTransformation.policies)
                 {
                     cfg.AddPolicy(policy, opt => opt.RequireAssertion(handler => handler.User.IsInRole("SUPERADMIN") || handler.User.HasClaim(m => m.Type.Equals(policy) && m.Value.Equals("1"))));
                 }
+            });
+
+            builder.Services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 104857600;
+            });
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalhost",
+                    policy => policy.WithOrigins("https://localhost:7074")
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod());
             });
 
             var app = builder.Build();
@@ -106,12 +131,35 @@ namespace WebAPI
             app.UseAuthorization();
             app.UseMiddleware<GlobalExceptionMiddleware>();
             app.UseDbTransaction();
+            app.UseCors("AllowLocalhost");
 
-            //app.UseStaticFiles(new StaticFileOptions
-            //{
-            //    RequestPath = "/files",
-            //    FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.WebRootPath, "Uploads"))
-            //});
+            app.Use(async (context, next) =>
+            {
+                await next();
+
+                if (context.Response.StatusCode == 400 && context.Request.Method == "POST")
+                {
+                    var endpoint = context.GetEndpoint();
+                    Console.WriteLine($"Request failed before reaching endpoint: {endpoint?.DisplayName}");
+
+                    var modelState = context.Features.Get<Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary>();
+                    if (modelState != null && !modelState.IsValid)
+                    {
+                        foreach (var state in modelState)
+                        {
+                            Console.WriteLine($"Key: {state.Key}, Errors: {string.Join(", ", state.Value.Errors.Select(e => e.ErrorMessage))}");
+                        }
+                    }
+                }
+            });
+
+
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                RequestPath = "/files",
+                FileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.WebRootPath, "Uploads"))
+            });
 
             app.MapControllers();
 

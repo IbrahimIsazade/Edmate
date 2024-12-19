@@ -15,7 +15,7 @@ namespace Persistence.Configurations
 			builder.Property(m => m.CategoryId).HasColumnType("int").IsRequired();
 			builder.Property(m => m.MentorId).HasColumnType("int").IsRequired();
 			builder.Property(m => m.Rating).HasColumnType("decimal").HasPrecision(18, 3).IsRequired();
-			builder.Property(m => m.ThumbnailPath).HasColumnType("varchar").HasMaxLength(50).IsRequired();
+			builder.Property(m => m.ThumbnailPath).HasColumnType("varchar").HasMaxLength(100).IsRequired();
 			builder.Property(m => m.Duration).HasColumnType("int").IsRequired();
 
 			builder.ConfigureAuditable();

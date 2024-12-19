@@ -20,7 +20,7 @@ namespace Application.Modules.AccountModule.Commands.SignInCommand
             string audience = Environment.GetEnvironmentVariable("JWT__AUDIENCE")!;
             int minutes = Convert.ToInt32(Environment.GetEnvironmentVariable("JWT__EXPIRATIONDURATIONMINUTES"));
 
-            var user = request.UserName switch
+            CustomUser? user = request.UserName switch
             {
                 _ when request.UserName.IsMail() => await userManager.FindByEmailAsync(request.UserName),
                 _ when request.UserName.IsPhone() => await userManager.Users.FirstOrDefaultAsync(m => m.PhoneNumberConfirmed && request.UserName.Equals(m.PhoneNumber)),
@@ -51,7 +51,7 @@ namespace Application.Modules.AccountModule.Commands.SignInCommand
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(token)
             };
 
-            response.RefreshToken = cryptoService.Sha1Hash($"DEMO_{response.AccessToken}_@APP");
+            response.RefreshToken = cryptoService.Sha1Hash($"Edmate_{response.AccessToken}");
 
             return response;
         }

@@ -11,8 +11,9 @@ namespace Persistence.Configurations
 		public void Configure(EntityTypeBuilder<Attachment> builder)
 		{
 			builder.Property(m => m.Id).HasColumnType("int").UseIdentityColumn(1, 1);
+			builder.Property(m => m.Title).HasColumnType("nvarchar").HasMaxLength(30).IsRequired();
 			builder.Property(m => m.CourseId).HasColumnType("int").IsRequired();
-			builder.Property(m => m.FilePath).HasColumnType("varchar").HasMaxLength(50).IsRequired();
+			builder.Property(m => m.FilePath).HasColumnType("varchar").HasMaxLength(100).IsRequired();
 
 			builder.ConfigureAuditable();
 

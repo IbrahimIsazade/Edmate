@@ -3,5 +3,5 @@ using MediatR;
 
 namespace Application.Modules.CourseModule.Queries.CourseGetAllQuery
 {
-    public class CourseGetAllQueryRequest : IRequest<IEnumerable<Course>> { }
+    public class CourseGetAllQueryRequest : IRequest<IEnumerable<CourseGetAllResponse>> { }
 }

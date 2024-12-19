@@ -3,6 +3,7 @@ using Domain.Entities;
 using Domain.Exceptions;
 using MediatR;
 using Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Modules.CourseModule.Commands.CourseAddCommand
 {
@@ -10,6 +11,8 @@ namespace Application.Modules.CourseModule.Commands.CourseAddCommand
         ICourseRepository courseRepository,
         ICategoryRepository categoryRepository,
         IMentorRepository mentorRepository,
+        IAttachmentRepository attachmentRepository,
+        IVideoRepository videoRepository,
         IFileService fileService) : IRequestHandler<CourseAddCommandRequest, Course>
     {
         public async Task<Course> Handle(CourseAddCommandRequest request, CancellationToken cancellationToken)
@@ -24,7 +27,7 @@ namespace Application.Modules.CourseModule.Commands.CourseAddCommand
                 throw new NotFoundException("Mentor not found");
             }
 
-            var filePath = await fileService.UploadAsync(request.Thumbnail, cancellationToken);
+            var imagePath = await fileService.UploadAsync(request.Image, cancellationToken);
 
             var course = new Course()
             {
@@ -33,12 +36,36 @@ namespace Application.Modules.CourseModule.Commands.CourseAddCommand
                 CategoryId = request.CategoryId,
                 MentorId = request.MentorId,
                 Rating = 0,
-                ThumbnailPath = filePath,
-                Duration = 0,
+                ThumbnailPath = imagePath,
+                Duration = 165
             };
+
 
             await courseRepository.AddAsync(course, cancellationToken);
             await courseRepository.SaveAsync(cancellationToken);
+            
+            var courseId = (from courses in courseRepository.GetAll() where courses.Description == request.Description select courses.Id).First();
+            
+            var attachment = new Attachment 
+            { 
+                Title = request.Title,
+                CourseId = courseId,
+                FilePath = await fileService.UploadAsync(request.Attachment)
+            };
+
+            var video = new Video
+            { 
+                Title = request.Title,
+                CourseId = courseId,
+                VideoPath = await fileService.UploadAsync(request.Video)
+            };
+
+
+            await attachmentRepository.AddAsync(attachment);
+            await attachmentRepository.SaveAsync(cancellationToken);
+
+            await videoRepository.AddAsync(video);
+            await videoRepository.SaveAsync(cancellationToken);
 
             return course;
         }

@@ -20,12 +20,14 @@ namespace Persistence.Contexts
 
                 #region Load Roles
                 var roles = await queryRoles.Select(m => m.NormalizedName).ToListAsync();
+                //Console.WriteLine("Roles for user: " + string.Join(", ", roles));
 
                 foreach (var role in roles)
                     identity.AddClaim(new Claim(ClaimTypes.Role, role));
                 #endregion
 
                 #region Load Claims
+                
                 var claims = await (from r in queryRoles
                                     join rc in db.Set<CustomRoleClaim>() on r.Id equals rc.RoleId
                                     where "1".Equals(rc.ClaimValue)
@@ -33,6 +35,8 @@ namespace Persistence.Contexts
                              .Union(from uc in db.Set<CustomUserClaim>()
                                     where "1".Equals(uc.ClaimValue) && uc.UserId == userId
                                     select uc.ClaimType).ToListAsync();
+                //Console.WriteLine("Claims for user: " + string.Join(", ", claims));
+
 
                 foreach (var claimType in claims)
                 {

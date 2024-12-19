@@ -1,15 +1,20 @@
-using Application.Services;
-using Domain.Entities;
+using Domain.Exceptions;
 using MediatR;
 using Repositories;
 
-namespace Application.Modules.VideoModule.Commands.DeleteCommand
+namespace Application.Modules.VideoModule.Commands.VideoDeleteCommand
 {
-    internal class VideoDeleteCommandRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<VideoDeleteCommandRequest, void>
+    internal class VideoDeleteCommandRequestHandler(IVideoRepository videoRepository) : IRequestHandler<VideoDeleteCommandRequest>
     {
-        public async Task<void> Handle(VideoDeleteCommandRequest request, CancellationToken cancellationToken)
+        async Task IRequestHandler<VideoDeleteCommandRequest>.Handle(VideoDeleteCommandRequest request, CancellationToken cancellationToken)
         {
-            // Logic here
+            var entity = await videoRepository.GetAsync(m => m.Id == request.Id, cancellationToken);
+
+            if (entity == null)
+                throw new NotFoundException("Video not found");
+
+            videoRepository.Delete(entity);
+            await videoRepository.SaveAsync(cancellationToken);
         }
     }
 }

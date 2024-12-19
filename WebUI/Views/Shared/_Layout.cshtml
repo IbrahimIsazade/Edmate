@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @await RenderSectionAsync("PageCss", required: true)
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
+    <title>@ViewData["Title"]</title>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="/img/logo.png" alt="Logo">
+        </div>
+
+        <!-- Sidebar Start -->
+        <ul class="sidebar_menus_container flex flex-col items-center">
+            <li class="flex flex-col items-center">
+                <a asp-controller="Home" asp-action="Index" class="sidebar_menu_element flex">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <ul class="sidebar_dropdown sidebar_menu_element" onclick="OpenClose(2, this)">
+                <li class="dropdown_name iconize flex just-between">
+                    <div class="flex just-between">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>Courses</span>
+                    </div>
+                </li>
+
+                <a asp-controller="Course" asp-action="Index" class="dropdown_element">
+                    Courses
+                </a>
+
+                <a asp-controller="Course" asp-action="CreateCourse" class="dropdown_element">
+                    Create Course
+                </a>
+            </ul>
+
+            <li class="flex flex-col items-center">
+                <a asp-controller="Student" asp-action="Index" class="sidebar_menu_element flex">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Students</span>
+                </a>
+            </li>
+
+            <li class="flex flex-col items-center">
+                <a asp-controller="Mentor" asp-action="Index" class="sidebar_menu_element flex active_menu ">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>Mentors</span>
+                </a>
+            </li>
+
+            <li class="flex flex-col items-center">
+                <a href="/messages" class="sidebar_menu_element flex">
+                    <i class="fa-solid fa-comments"></i>
+                    <span>Messages</span>
+                </a>
+            </li>
+
+            <li class="flex flex-col items-center">
+                <a asp-controller="Library" asp-action="Index" class="sidebar_menu_element flex">
+                    <i class="fa-solid fa-book"></i>
+                    <span>Library</span>
+                </a>
+            </li>
+
+            <li class="flex flex-col items-center">
+                <a asp-controller="Plans" asp-action="Index" class="sidebar_menu_element flex">
+                    <i class="fa-solid fa-coins"></i>
+                    <span>Pricing</span>
+                </a>
+            </li>
+
+            <h4 style=" margin-top: 20px;">Admin tools</h4>
+
+            <li class="flex flex-col items-center">
+                <a asp-controller="Categories" asp-action="Index" class="sidebar_menu_element flex">
+                    <i class="fa-solid fa-icons"></i>
+                    <span>Categories</span>
+                </a>
+            </li>
+
+            <li class="flex flex-col items-center">
+                <a asp-controller="Course" asp-action="IndexAdmin" class="sidebar_menu_element flex">
+                    <i class="fa-solid fa-video"></i>
+                    <span>Courses</span>
+                </a>
+            </li>
+
+            <li class="flex flex-col items-center">
+                <a asp-controller="Libray" asp-action="IndexAdmin" class="sidebar_menu_element flex">
+                    <i class="fa-solid fa-book"></i>
+                    <span>Books</span>
+                </a>
+            </li>
+
+            <li class="flex flex-col items-center">
+                <a asp-controller="Mentor" asp-action="IndexAdmin" class="sidebar_menu_element flex">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <span>Mentors</span>
+                </a>
+            </li>
+
+            <li class="flex flex-col items-center">
+                <a asp-controller="Student" asp-action="IndexAdmin" class="sidebar_menu_element flex">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <span>Students</span>
+                </a>
+            </li>
+        </ul>
+        <!-- Sidebar End -->
+
+    </aside>
+
+    <header class="header flex items-center just-between">
+
+        <div class="search flex items-center">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search...">
+        </div>
+
+        <div class="account flex items-center just-around">
+            <div class="language flex items-center just-center pointer">
+                <i class="fa-solid fa-globe"></i>
+            </div>
+            <div class="profile pointer dropdown-ico flex items-center just-between" onclick="DropdownIco(this)">
+                <img src="/img/profile.png" alt="Profile-pic">
+                <i class="fa-solid fa-chevron-right"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="main flex flex-col">
+        @RenderBody()
+    </main>
+
+    <script src="https://kit.fontawesome.com/3c9b88224f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="~/js/Layout.js"></script>
+    @await RenderSectionAsync("PageJs", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

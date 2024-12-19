@@ -10,6 +10,7 @@ namespace Application.Modules.AccountModule.Commands.SignUpCommand
 {
     class SignUpRequestHandler(UserManager<CustomUser> userManager, 
         ICryptoService cryptoService,
+        IEmailService emailService,
         IHttpContextAccessor ctx) : IRequestHandler<SignUpRequest>
     {
         public async Task Handle(SignUpRequest request, CancellationToken cancellationToken)
@@ -55,9 +56,11 @@ namespace Application.Modules.AccountModule.Commands.SignUpCommand
 
             string confirmationUrl = $"{ctx.GetHost()}/approve-account?token={cryptoService.Encrypt($"{user.Id}-{user.Email}-{DateTime.UtcNow.AddMinutes(20):yyyy.MM.dd HH:mm:ss}", true)}";
 
-            //string content = File.ReadAllText(Path.Combine("wwwroot", "email-templates", "email-confirmation-ticket.html"));
+            string content = "Confirm you email please";// File.ReadAllText(Path.Combine("wwwroot", "email-templates", "email-confirmation-ticket.html"));
 
-            //content = string.Format(content, $"{request.Name} {request.Surname}", confirmationUrl);
+            content = string.Format(content, $"{request.Name} {request.Surname}", confirmationUrl);
+
+            await emailService.SendEmail(request.Email, "Email confirm", content);
 
         }
     }

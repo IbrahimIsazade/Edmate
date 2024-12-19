@@ -1,0 +1,77 @@
+﻿@model SignInRequestDto
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "SignIn";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/login.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
+</head>
+
+<body>
+    <div class="login-page flex">
+        <div class="left flex items-center just-center">
+            <img src="~/img/auth-img1.png" alt="login-image">
+        </div>
+
+        <div class="right flex items-center just-center">
+            <div class="login-form flex flex-col items-center just-center">
+                <div class="logo">
+                    <img src="/img/logo.png" alt="logo">
+                </div>
+
+                <div class="text flex flex-col">
+                    <h3>Welcome to Back! 👋</h3>
+                    <span>Please sign in to your account and start the adventure</span>
+                </div>
+
+                <form asp-controller="Account" asp-action="SignIn" method="post" class="flex flex-col items-center just-between">
+                    <div class="input-form flex flex-col">
+                        <span>Email or username</span>
+                        <div class="input flex items-center">
+                            <i class="fa-solid fa-user"></i>
+                            <input asp-for="UserName" type="text" placeholder="Type your username/email">
+                        </div>
+                    </div>
+
+                    <div class="input-form flex flex-col">
+                        <span>Your password</span>
+                        <div class="input flex items-center">
+                            <i class="fa-solid fa-lock"></i>
+                            <input asp-for="Password" type="password" placeholder="Type your password">
+                        </div>
+                    </div>
+
+                    <div class="actions flex items-center just-between">
+                        <div class="checkbox flex items-center">
+                            <input type="checkbox" id="rememberMe" name="rememberMe" value="rememberMe" class="ui-checkbox">
+                            <label class="pointer" for="rememberMe" style="margin-left: 10px;">Remember Me</label>
+                        </div>
+
+                        <a class="link" href="./forgot-pass.html">Forgot password</a>
+                    </div>
+
+                    <button class="sign-in pointer">Sign in</button>
+                </form>
+
+                <div class="create-account flex items-center just-around">
+                    <span>New on our platform ?</span>
+                    <a class="link" href="./sign-up.html">Create account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/3c9b88224f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</body>
+
+</html>

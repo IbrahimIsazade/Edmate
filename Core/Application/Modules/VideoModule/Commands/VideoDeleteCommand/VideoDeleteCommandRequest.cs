@@ -1,7 +1,7 @@
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Modules.VideoModule.Commands.DeleteCommand
+namespace Application.Modules.VideoModule.Commands.VideoDeleteCommand
 {
     public class VideoDeleteCommandRequest : IRequest
     {

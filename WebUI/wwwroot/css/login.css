@@ -1,0 +1,188 @@
+@charset "UTF-8";
+@import url(layout.css);
+
+body {
+  overflow: hidden;
+}
+
+.login-page {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.login-page .left {
+  height: 100%;
+  width: 55%;
+  padding: 50px;
+}
+.login-page .left img {
+  margin-top: 20%;
+}
+.login-page .right {
+  height: 780px;
+  width: 45%;
+  background-color: white;
+  padding: 50px;
+}
+.login-page .right .login-form {
+  width: 75%;
+}
+.login-page .right .login-form .logo {
+  width: 100%;
+}
+.login-page .right .login-form .logo img {
+  scale: 1.1;
+}
+.login-page .right .login-form .text {
+  margin-top: 70px;
+  width: 100%;
+}
+.login-page .right .login-form .text h3 {
+  font-size: 32px;
+  font-weight: 500;
+}
+.login-page .right .login-form .text span {
+  margin-left: 0px;
+  margin-top: 10px;
+  font-size: 17px;
+}
+.login-page .right .login-form form {
+  width: 100%;
+  margin-top: 30px;
+}
+.login-page .right .login-form form .input-form {
+  width: 100%;
+  margin-top: 30px;
+}
+.login-page .right .login-form form .input-form span {
+  font-weight: 500;
+}
+.login-page .right .login-form form .input-form .input {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 5px;
+  transition: 0.2s all;
+}
+.login-page .right .login-form form .input-form .input i {
+  scale: 0.9;
+}
+.login-page .right .login-form form .input-form .input input {
+  height: 30px;
+  width: 100%;
+  margin-left: 10px;
+}
+.login-page .right .login-form form .actions {
+  width: 99%;
+  margin-top: 10px;
+}
+.login-page .right .login-form form .actions .checkbox {
+  /* checkbox settings 👇 */
+  /* actions */
+}
+.login-page .right .login-form form .actions .checkbox .ui-checkbox {
+  --primary-color: #1677ff;
+  --secondary-color: #fff;
+  --primary-hover-color: #4096ff;
+  /* checkbox */
+  --checkbox-diameter: 20px;
+  --checkbox-border-radius: 5px;
+  --checkbox-border-color: #d9d9d9;
+  --checkbox-border-width: 1px;
+  --checkbox-border-style: solid;
+  /* checkmark */
+  --checkmark-size: 1.2;
+}
+.login-page .right .login-form form .actions .checkbox .ui-checkbox,
+.login-page .right .login-form form .actions .checkbox .ui-checkbox *,
+.login-page .right .login-form form .actions .checkbox .ui-checkbox *::before,
+.login-page .right .login-form form .actions .checkbox .ui-checkbox *::after {
+  box-sizing: border-box;
+}
+.login-page .right .login-form form .actions .checkbox .ui-checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: var(--checkbox-diameter);
+  height: var(--checkbox-diameter);
+  border-radius: var(--checkbox-border-radius);
+  background: var(--secondary-color);
+  border: var(--checkbox-border-width) var(--checkbox-border-style) var(--checkbox-border-color);
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+.login-page .right .login-form form .actions .checkbox .ui-checkbox::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
+  border-radius: inherit;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+}
+.login-page .right .login-form form .actions .checkbox .ui-checkbox::before {
+  top: 40%;
+  left: 50%;
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 7px;
+  border-right: 2px solid var(--secondary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  transform: translate(-50%, -50%) rotate(45deg) scale(0);
+  opacity: 0;
+  transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6), opacity 0.1s;
+}
+.login-page .right .login-form form .actions .checkbox .ui-checkbox:hover {
+  border-color: var(--primary-color);
+}
+.login-page .right .login-form form .actions .checkbox .ui-checkbox:checked {
+  background: var(--primary-color);
+  border-color: transparent;
+}
+.login-page .right .login-form form .actions .checkbox .ui-checkbox:checked::before {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+  transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+}
+.login-page .right .login-form form .actions .checkbox .ui-checkbox:active:not(:checked)::after {
+  -webkit-transition: none;
+  -o-transition: none;
+  box-shadow: none;
+  transition: none;
+  opacity: 1;
+}
+.login-page .right .login-form form .sign-in {
+  width: 100%;
+  margin-top: 18px;
+  border: none;
+  background-color: #4096ff;
+  padding: 15px;
+  border-radius: 30px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  transition: 0.2s all;
+}
+.login-page .right .login-form form .sign-in:hover {
+  scale: 1.05;
+  background-color: #1677ff;
+}
+.login-page .right .login-form form .sign-in:active {
+  scale: 1;
+}
+.login-page .right .login-form .create-account {
+  width: 70%;
+  margin-top: 15px;
+}
+.login-page .right .login-form .link {
+  color: #1677ff;
+  font-weight: 500;
+}
+.login-page .right .login-form .link:hover {
+  text-decoration: underline;
+}/*# sourceMappingURL=login.css.map */

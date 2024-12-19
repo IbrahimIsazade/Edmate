@@ -1,0 +1,163 @@
+﻿@model CourseAddRequestDto
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Create Course";
+}
+
+@section PageJs {
+    <script src="~/js/create-course.js" defer></script>
+}
+
+@section PageCss {
+    <link rel="stylesheet" href="~/css/create-course.css">
+}
+
+<h2>Create Course</h2>
+
+<div class="box flex flex-col items-center">
+    <div class="states flex items-center just-between">
+        <div class="state done" id="1">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Course Details</span>
+        </div>
+        <div class="state" id="2">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Upload Video</span>
+        </div>
+        <div class="state" id="3">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Attachments</span>
+        </div>
+        <div class="state" id="4">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Publish</span>
+        </div>
+    </div>
+
+    <form asp-action="CreateCourseRequest" method="post" enctype="multipart/form-data" style="width: 100%;" name="courseForm">
+        <div class="stage inputs flex items-center just-between" id="stage-1" style="transition: .3s all;">
+            <div class="upload-box flex flex-col items-center just-center" id="uploadBox">
+                <div id="text" class="text flex flex-col items-center just-center">
+                    <i class="fa-solid fa-image" style="width: 100px;height: 100px;font-size: 100px;"></i>
+                    <b style="color: #3479F9; font-size: 20px;">Thumbnail image</b>
+                    <span style="font-size: 12px;margin-left: 0;">( max 5mb )</span>
+                </div>
+                <img id="preview">
+                <input asp-for="Image" class="pointer" type="file" accept="image/*" id="imageUpload" />
+            </div>
+
+            <div class="course-info-inputs flex flex-col items-center">
+                <div class="grid">
+                    <div class="grid-item flex flex-col">
+                        <span>Course Name <span style="color: tomato; font-weight: 200;">*</span> </span>
+                        <input asp-for="Title" type="text" placeholder="Course name here" id="">
+                    </div>
+
+
+                    <div class="grid-item flex flex-col">
+                        <span>Course Category</span>
+                        @await Component.InvokeAsync("AllCategories")
+                    </div>
+
+                    <div class="grid-item flex flex-col">
+                        <span>Course description</span>
+                        <textarea asp-for="Description" style="resize: none;height: 120px;" placeholder="Course description here"></textarea>
+                    </div>
+                </div>
+
+                <div class="divs flex just-between">
+                    <div class="cancel pointer">Cancel</div>
+                    <div onclick="nextStage(2)" class="continue pointer continue">Continue</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage inputs flex items-center just-between" id="stage-2" style="display: none; transition: .3s all;">
+            <div class="upload-box flex flex-col items-center just-center" id="video-upload-box">
+                <h3 id="loadingText" style="display: none;">Loading...</h3>
+                <div id="videoText" class="text flex flex-col items-center just-center">
+                    <i class="fa-solid fa-film" style="width: 100px;height: 100px;font-size: 100px;"></i>
+                    <b class="videoName" style="color: #3479F9; font-size: 20px;">Upload Video</b>
+                    <span style="font-size: 12px;margin-left: 0;">( max 300 MB )</span>
+
+                    <video id="video-tag" style="border-radius: 10px; width: 300px; height: 250px; display: none;">
+                        <source id="video-source">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <input asp-for="Video" class="pointer" type="file" accept="video/*" id="videoUpload" />
+            </div>
+
+            <div class="course-info-inputs flex flex-col items-center">
+                <div id="video-form" class="grid">
+                    <div class="grid-item flex flex-col">
+                        <span>Video title <span style="color: tomato; font-weight: 200;">*</span> </span>
+                        <input asp-for="VideoTitle" type="text" placeholder="Video title here..." id="video-title">
+                    </div>
+                </div>
+
+                <div class="divs flex just-between">
+                    <div onclick="prevStage(1)" class="cancel pointer">Back</div>
+                    <div onclick="nextStage(3)" class="pointer continue">Continue</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stage inputs flex items-center just-between" id="stage-3" style="display: none; transition: .3s all;">
+            <div class="upload-box flex flex-col items-center just-center" id="attachment-upload-box">
+                <h3 id="loadingText" style="display: none;">Loading...</h3>
+                <div id="videoText" class="text flex flex-col items-center just-center">
+                    <i class="fa-regular fa-file" style="width: 100px;height: 100px;font-size: 100px;"></i>
+                    <b class="attachmentName" style="color: #3479F9; font-size: 20px;">Attach file</b>
+                    <span style="font-size: 12px;margin-left: 0;">.txt/.pdf/.doc/.docx ( max 20 MB )</span>
+                </div>
+                <input name="Attachment" class="pointer" type="file" accept=".txt,.pdf,.doc,.docx" id="attachmentUpload" />
+            </div>
+
+            <div class="course-info-inputs flex flex-col items-center">
+                <div id="attacment-form" class="grid">
+                    <div class="grid-item flex flex-col">
+                        <span>Attachment title <span style="color: tomato; font-weight: 200;">*</span> </span>
+                        <input asp-for="AttachmentTitle" type="text" placeholder="Attachment title here..." id="video-title">
+                    </div>
+
+                    <div class="grid-item flex flex-col" style="margin-left: 0px;display: grid; grid-column: 1/3; grid-row: 2/4;">
+                        <span>Attachment description <span style="color: tomato; font-weight: 200;">*</span> </span>
+                        <textarea asp-for="AttachmentDescription" style="height: 120px;resize: none;" placeholder="Attachment description here" id="video-description"></textarea>
+                    </div>
+                </div>
+
+                <div class="divs flex just-between">
+                    <div onclick="prevStage(2)" class="cancel pointer">Back</div>
+                    <input type="submit" name="submit" onclick="submitCourse()" value="Publish" class="pointer continue">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@* <form asp-action="CreateCourseRequest" method="post" enctype="multipart/form-data" style="width: 100%;" name="courseForm">
+    <!-- Title and Description -->
+    <input asp-for="Title" type="text" placeholder="Course name here" id="courseTitle" />
+    <textarea asp-for="Description" style="resize: none;height: 120px;" placeholder="Course description here"></textarea>
+
+    <!-- Categories (Invoke component for categories) -->
+    @await Component.InvokeAsync("AllCategories")
+
+    <!-- Image Upload -->
+    <input asp-for="Image" type="file" accept="image/*" id="imageUpload" />
+
+    <!-- Video Upload -->
+    <input asp-for="Video" type="file" accept="video/*" id="videoUpload" />
+    <input asp-for="VideoTitle" type="text" placeholder="Video title here..." id="videoTitle" />
+
+    <!-- Attachment Upload -->
+    <input asp-for="Attachment" type="file" accept=".txt,.pdf,.doc,.docx" id="attachmentUpload" />
+    <input asp-for="AttachmentTitle" type="text" placeholder="Attachment title here..." id="attachmentTitle" />
+    <textarea asp-for="AttachmentDescription" style="height: 120px;resize: none;" placeholder="Attachment description here" id="attachmentDescription"></textarea>
+
+    <span asp-asp-validation-for="All" class="text-danger"></span>
+    <!-- Submit -->
+    <input type="submit" value="Submit" />
+</form> *@

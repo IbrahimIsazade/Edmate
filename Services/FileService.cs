@@ -1,4 +1,5 @@
-﻿using Application.Services;
+﻿using Application.Extensions;
+using Application.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using Services.Registration;
@@ -6,7 +7,7 @@ using Services.Registration;
 namespace Services
 {
     [SingletonLifeTime]
-    public class FileService(IHostEnvironment env) : IFileService
+    public class FileService(IHostEnvironment env, IHttpContextAccessor ctx) : IFileService
     {
         public async Task<string> UploadAsync(IFormFile file, CancellationToken cancellationToken = default)
         {
@@ -17,7 +18,6 @@ namespace Services
 
             var extension = Path.GetExtension(file.FileName);
             var fileName = $"{Guid.NewGuid()}{extension}";
-            Console.WriteLine($"EVOIRMENT CONTENT ROOT PATH -> {env.ContentRootPath}");
             string fullPath = Path.Combine(env.ContentRootPath, "wwwroot", "Uploads", fileName);
 
             using (var fs = new FileStream(fullPath, FileMode.Create, FileAccess.ReadWrite))
@@ -25,7 +25,7 @@ namespace Services
                 await file.CopyToAsync(fs, cancellationToken);
             }
 
-            return fileName;
+            return $"{ctx.GetHost()}/files/{fileName}";
         }
     }
 }

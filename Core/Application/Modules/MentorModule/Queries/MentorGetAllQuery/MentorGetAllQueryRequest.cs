@@ -3,8 +3,7 @@ using MediatR;
 
 namespace Application.Modules.MentorModule.Commands.GetAllQuery
 {
-    public class MentorGetAllQueryRequest : IRequest<IEnumerable<Mentor>>
+    public class MentorGetAllQueryRequest : IRequest<IEnumerable<MentorResponse>>
     {
-        // properties if they are needed
     }
 }

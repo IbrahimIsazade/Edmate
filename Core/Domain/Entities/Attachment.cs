@@ -5,7 +5,8 @@ namespace Domain.Entities
     public class Attachment : AuditableEntity, IEntity, IAuditableEntity
     {
         public int Id { get; set; }
-        public required int CourseId { get; set; }
-        public required string FilePath { get; set; }
+        public int CourseId { get; set; }
+        public string Title { get; set; }
+        public string FilePath { get; set; }
     }
 }

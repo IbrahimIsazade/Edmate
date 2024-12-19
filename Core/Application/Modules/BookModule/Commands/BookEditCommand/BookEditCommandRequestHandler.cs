@@ -20,11 +20,6 @@ namespace Application.Modules.BookModule.Commands.BookEditCommand
                 entity.ThumbnailPath = fileService.UploadAsync(request.Thumbnail).ToString()!;
             }
 
-            if (request.Pdf != null)
-            {
-                entity.PdfPath = fileService.UploadAsync(request.Pdf).ToString()!;
-            }
-
             entity.Title = request.Title;
             entity.Description = request.Description;
 

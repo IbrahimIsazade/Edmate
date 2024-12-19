@@ -1,0 +1,239 @@
+﻿@model IEnumerable<MentorResponseDto>
+@{
+    ViewData["Title"] = "Mentors";
+}
+
+@section PageCss {
+    <link rel="stylesheet" href="~/css/mentors.css">
+}
+
+<h2>Mentors</h2>
+
+<div class="box flex flex-col items-center">
+    <div class="boxes flex flex-col items-center">
+        <div class="mentor-box flex flex-col just-between">
+            <div class="top flex items-center just-between" style="width: 100%;">
+                <h2 class="title">Popular<span style="font-size: 12px;font-weight: 500;">(this month)</span></h2>
+            </div>
+
+            <div class="mentors popular-courses flex items-center just-around">
+                @foreach (var item in Model.Take(4))
+                {
+                    <div class="mentor-card flex flex-col just-between items-center">
+
+                        <img class="thumbnail" src="@item.CoverPath" alt="mentor-img">
+
+                        <div class="content flex flex-col items-center">
+                            <div class="author flex flex-col items-center just-center">
+                                <div class="profile-img flex just-center items-center">
+                                    <img src="@item.ProfilePath" alt="">
+                                </div>
+                                <a class="author-link" href="profile" style="transition: .2s all;font-weight: 500;">@item.FirstName @item.LastName</a>
+                            </div>
+
+                            <div class="mentor-category flex items-center just-center">
+                                <h4>@String.Join("", item.CategoryName)</h4>
+                            </div>
+
+                            <p class="about">@String.Join("", item.Bio) </p>
+
+                            <div class="details flex items-center just-between">
+                                <div class="courses flex items-center">
+                                    <i class="fa-solid fa-book-open"></i>
+                                    <span>0</span>
+                                </div>
+                                <div class="rating flex items-center just-center">
+                                    <i class="fa-solid fa-star"></i>
+                                    <span>0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                } 
+            </div>
+        </div>
+
+        <div class="mentor-box flex flex-col just-between" style="height: 900px;">
+            <!--
+            yuxarida, kurslarin sayini 4'e bolub onu 470'e vur ve height ver (4 dene kurs -> 500px, 5 dene kurs -> 1000px)
+            Bunun ucun ChatGPT verdiyi bir Python kod:
+                Yoxdu =)
+            -->
+            <div class="top flex items-center just-between" style="width: 100%;">
+                <h2 class="title">All Courses<span style="font-size: 12px;font-weight: 500;">(this year)</span></h2>
+                <div class="filters flex items-center just-around" style="width: 280px;">
+                    <select name="category" id="">
+                        <option value="" disabled selected>Category</option>
+                        <option value="development">Development</option>
+                        <option value="design">Design</option>
+                        <option value="game">Game</option>
+                    </select>
+                    <select name="sort" id="">
+                        <option value="" disabled selected>Sort</option>
+                        <option value="latest">Latest</option>
+                        <option value="popular">Popular</option>
+                        <option value="a-z">A-Z</option>
+                        <option value="z-a">Z-A</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mentors popular-courses flex items-center just-around">
+                <div class="mentor-card flex flex-col just-between items-center">
+
+                    <img class="thumbnail" src="/img/mentor-cover-img10.png" alt="course-img">
+
+                    <div class="content flex flex-col items-center">
+                        <div class="author flex flex-col items-center just-center">
+                            <div class="profile-img flex just-center items-center">
+                                <img src="/img/profile.png" alt="">
+                            </div>
+                            <a class="author-link" href="profile" style="transition: .2s all;font-weight: 500;">Jhon Doe</a>
+                        </div>
+
+                        <div class="mentor-category flex items-center just-center">
+                            <h4>Web development</h4>
+                        </div>
+
+                        <p class="about">Hi, I am Alex Stanton, A doctoral a Oxford University majoring in UI/UX.</p>
+
+                        <div class="details flex items-center just-between">
+                            <div class="courses flex items-center">
+                                <i class="fa-solid fa-book-open"></i>
+                                <span>12 Courses</span>
+                            </div>
+                            <div class="rating flex items-center just-center">
+                                <i class="fa-solid fa-star"></i>
+                                <span>4.4 (12K)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-card flex flex-col just-between items-center">
+
+                    <img class="thumbnail" src="/img/mentor-cover-img10.png" alt="course-img">
+
+                    <div class="content flex flex-col items-center">
+                        <div class="author flex flex-col items-center just-center">
+                            <div class="profile-img flex just-center items-center">
+                                <img src="/img/profile.png" alt="">
+                            </div>
+                            <a class="author-link" href="profile" style="transition: .2s all;font-weight: 500;">Jhon Doe</a>
+                        </div>
+
+                        <div class="mentor-category flex items-center just-center">
+                            <h4>Web development</h4>
+                        </div>
+
+                        <p class="about">Hi, I am Alex Stanton, A doctoral a Oxford University majoring in UI/UX.</p>
+
+                        <div class="details flex items-center just-between">
+                            <div class="courses flex items-center">
+                                <i class="fa-solid fa-book-open"></i>
+                                <span>12 Courses</span>
+                            </div>
+                            <div class="rating flex items-center just-center">
+                                <i class="fa-solid fa-star"></i>
+                                <span>4.4 (12K)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-card flex flex-col just-between items-center">
+
+                    <img class="thumbnail" src="/img/mentor-cover-img10.png" alt="course-img">
+
+                    <div class="content flex flex-col items-center">
+                        <div class="author flex flex-col items-center just-center">
+                            <div class="profile-img flex just-center items-center">
+                                <img src="/img/profile.png" alt="">
+                            </div>
+                            <a class="author-link" href="profile" style="transition: .2s all;font-weight: 500;">Jhon Doe</a>
+                        </div>
+
+                        <div class="mentor-category flex items-center just-center">
+                            <h4>Web development</h4>
+                        </div>
+
+                        <p class="about">Hi, I am Alex Stanton, A doctoral a Oxford University majoring in UI/UX.</p>
+
+                        <div class="details flex items-center just-between">
+                            <div class="courses flex items-center">
+                                <i class="fa-solid fa-book-open"></i>
+                                <span>12 Courses</span>
+                            </div>
+                            <div class="rating flex items-center just-center">
+                                <i class="fa-solid fa-star"></i>
+                                <span>4.4 (12K)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-card flex flex-col just-between items-center">
+
+                    <img class="thumbnail" src="/img/mentor-cover-img10.png" alt="course-img">
+
+                    <div class="content flex flex-col items-center">
+                        <div class="author flex flex-col items-center just-center">
+                            <div class="profile-img flex just-center items-center">
+                                <img src="/img/profile.png" alt="">
+                            </div>
+                            <a class="author-link" href="profile" style="transition: .2s all;font-weight: 500;">Jhon Doe</a>
+                        </div>
+
+                        <div class="mentor-category flex items-center just-center">
+                            <h4>Web development</h4>
+                        </div>
+
+                        <p class="about">Hi, I am Alex Stanton, A doctoral a Oxford University majoring in UI/UX.</p>
+
+                        <div class="details flex items-center just-between">
+                            <div class="courses flex items-center">
+                                <i class="fa-solid fa-book-open"></i>
+                                <span>12 Courses</span>
+                            </div>
+                            <div class="rating flex items-center just-center">
+                                <i class="fa-solid fa-star"></i>
+                                <span>4.4 (12K)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-card flex flex-col just-between items-center">
+
+                    <img class="thumbnail" src="/img/mentor-cover-img10.png" alt="course-img">
+
+                    <div class="content flex flex-col items-center">
+                        <div class="author flex flex-col items-center just-center">
+                            <div class="profile-img flex just-center items-center">
+                                <img src="/img/profile.png" alt="">
+                            </div>
+                            <a class="author-link" href="profile" style="transition: .2s all;font-weight: 500;">Jhon Doe</a>
+                        </div>
+
+                        <div class="mentor-category flex items-center just-center">
+                            <h4>Web development</h4>
+                        </div>
+
+                        <p class="about">Hi, I am Alex Stanton, A doctoral a Oxford University majoring in UI/UX.</p>
+
+                        <div class="details flex items-center just-between">
+                            <div class="courses flex items-center">
+                                <i class="fa-solid fa-book-open"></i>
+                                <span>12 Courses</span>
+                            </div>
+                            <div class="rating flex items-center just-center">
+                                <i class="fa-solid fa-star"></i>
+                                <span>4.4 (12K)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

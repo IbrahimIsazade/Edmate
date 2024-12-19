@@ -14,8 +14,8 @@ namespace Persistence.Configurations
 			builder.Property(m => m.Description).HasColumnType("nvarchar(max)").IsRequired();
 			builder.Property(m => m.CategoryId).HasColumnType("int").IsRequired();
 			builder.Property(m => m.PublisherId).HasColumnType("int").IsRequired();
-			builder.Property(m => m.ThumbnailPath).HasColumnType("varchar").HasMaxLength(50).IsRequired();
-			builder.Property(m => m.PdfPath).HasColumnType("varchar").HasMaxLength(50).IsRequired();
+			builder.Property(m => m.ThumbnailPath).HasColumnType("varchar").HasMaxLength(100).IsRequired();
+			builder.Property(m => m.PdfPath).HasColumnType("varchar").HasMaxLength(100).IsRequired();
 			builder.Property(m => m.AproximateReading).HasColumnType("int").IsRequired();
 
 			builder.ConfigureAuditable();

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.Modules.CourseModule.Commands.CourseEditCommand
 {
-    public class CourseEditCommandRequest : IRequest<Course>
+    public class CourseEditCommandRequest : IRequest<Domain.Entities.Course>
     {
         public int Id { get; set; }
         public required string Title { get; set; }

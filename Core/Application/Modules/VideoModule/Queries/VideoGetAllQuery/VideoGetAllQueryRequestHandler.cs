@@ -3,13 +3,13 @@ using Domain.Entities;
 using MediatR;
 using Repositories;
 
-namespace Application.Modules.VideoModule.Commands.GetAllQuery
+namespace Application.Modules.VideoModule.Queries.VideoGetAllQuery
 {
-    internal class VideoGetAllQueryRequestHandler(IAwardRepository awardRepository, IEntityService entityService) : IRequestHandler<VideoGetAllQueryRequest, IEnumerable<Award>>
+    internal class VideoGetAllQueryRequestHandler(IVideoRepository videoRepository) : IRequestHandler<VideoGetAllQueryRequest, IEnumerable<Video>>
     {
-        public async Task<IEnumerable<Award>> Handle(VideoGetAllQueryRequest request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Video>> Handle(VideoGetAllQueryRequest request, CancellationToken cancellationToken)
         {
-            // Logic here
+            return videoRepository.GetAll().ToList();
         }
     }
 }

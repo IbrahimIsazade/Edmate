@@ -1,0 +1,9 @@
+﻿@model IEnumerable<CategoryDto>
+
+<select name="Category">
+    <option disabled selected value="Category">Select category</option>
+    @foreach (var item in Model)
+    {
+        <option value="@item.Id">@item.Name</option>
+    }
+</select>

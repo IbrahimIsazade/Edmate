@@ -18,8 +18,8 @@ namespace Persistence.Configurations
 			builder.Property(m => m.PhoneNumber).HasColumnType("varchar").HasMaxLength(50).IsRequired();
 			builder.Property(m => m.Bio).HasColumnType("nvarchar(max)").IsRequired();
 			builder.Property(m => m.CategoryId).HasColumnType("int").IsRequired();
-			builder.Property(m => m.ProfilePath).HasColumnType("varchar").HasMaxLength(50).IsRequired();
-			builder.Property(m => m.CoverPath).HasColumnType("varchar").HasMaxLength(50).IsRequired();
+			builder.Property(m => m.ProfilePath).HasColumnType("varchar").HasMaxLength(100).IsRequired();
+			builder.Property(m => m.CoverPath).HasColumnType("varchar").HasMaxLength(100).IsRequired();
 			builder.Property(m => m.Followers).HasColumnType("int").IsRequired();
 			builder.Property(m => m.Following).HasColumnType("int").IsRequired();
 			builder.Property(m => m.Likes).HasColumnType("int").IsRequired();
