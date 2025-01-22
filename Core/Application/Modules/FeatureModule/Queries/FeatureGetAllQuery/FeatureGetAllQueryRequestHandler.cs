@@ -1,15 +1,21 @@
-using Application.Services;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Repositories;
 
 namespace Application.Modules.FeatureModule.Commands.GetAllQuery
 {
-    internal class FeatureGetAllQueryRequestHandler(IFeatureRepository featureRepository) : IRequestHandler<FeatureGetAllQueryRequest, IEnumerable<Feature>>
+    internal class FeatureGetAllQueryRequestHandler(IFeatureRepository featureRepository) : IRequestHandler<FeatureGetAllByIdQueryRequest, IEnumerable<Feature>>
     {
-        public async Task<IEnumerable<Feature>> Handle(FeatureGetAllQueryRequest request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Feature>> Handle(FeatureGetAllByIdQueryRequest request, CancellationToken cancellationToken)
         {
-            return featureRepository.GetAll().ToList();
+            var response = await (from features in featureRepository.GetAll() where (features.IsCourseFeature == request.IsCourse) && (features.ItemId == request.Id)
+                           select features).ToListAsync(cancellationToken);
+
+            if (response is null)
+                throw new ArgumentNullException(nameof(response));
+
+            return response;
         }
     }
 }

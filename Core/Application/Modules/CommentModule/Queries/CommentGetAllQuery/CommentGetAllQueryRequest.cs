@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.Modules.CommentModule.Queries.CommentGetAllQuery
 {
-    public class CommentGetAllQueryRequest : IRequest<IEnumerable<Comment>>
+    public class CommentGetAllQueryRequest : IRequest<IEnumerable<CommentResponse>>
     {
         // properties if they are needed
     }

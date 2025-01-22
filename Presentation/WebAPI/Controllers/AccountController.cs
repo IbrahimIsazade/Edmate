@@ -19,6 +19,7 @@ namespace WebAPI.Controllers
         [HttpPost("signup")]
         public async Task<IActionResult> SignUp([FromBody] SignUpRequest request)
         {
+            Console.WriteLine("Controller reached...");
             await mediator.Send(request);
             return NoContent();
         }
@@ -41,7 +42,6 @@ namespace WebAPI.Controllers
             return Ok(dto);
         }
 
-        //[Transaction]
         [AllowAnonymous]
         [HttpPost("refresh-token")]
         public async Task<IActionResult> RefreshToken([FromHeader] RefreshTokenRequest request)

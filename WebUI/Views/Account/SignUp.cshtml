@@ -1,0 +1,109 @@
+﻿@model SignUpRequestDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/login.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
+    <title>Sign up</title>
+</head>
+
+<body style="overflow-y: scroll;">
+    <div class="login-page flex">
+        <div class="left flex items-center just-center">
+            <img src="/img/auth-img2.png" alt="login-image">
+        </div>
+
+        <div class="right flex items-center just-center" style="height: 120%">
+            <div class="login-form flex flex-col items-center just-center">
+                <div class="logo">
+                    <img src="/img/logo.png" alt="logo">
+                </div>
+
+                <div class="text flex flex-col">
+                    <h3>Sign up</h3>
+                    <span>Please sign up to your account and start the adventure</span>
+                </div>
+
+                <form asp-action="SignUp" method="post" class="flex flex-col items-center just-between">
+                    <div class="input-form flex flex-col">
+                        <span>Username</span>
+                        <div class="input flex items-center">
+                            <i class="fa-solid fa-user"></i>
+                            <input asp-for="UserName" type="text" placeholder="Type your username">
+                        </div>
+                    </div>
+
+                    <div class="input-form flex flex-col">
+                        <span>Username</span>
+                        <div class="input flex items-center">
+                            <i class="fa-solid fa-user"></i>
+                            <input asp-for="Name" type="text" placeholder="Type your Firstname">
+                        </div>
+                    </div>
+
+                    <div class="input-form flex flex-col">
+                        <span>Username</span>
+                        <div class="input flex items-center">
+                            <i class="fa-solid fa-user"></i>
+                            <input asp-for="Surename" type="text" placeholder="Type your Lastname">
+                        </div>
+                    </div>
+
+                    <div class="input-form flex flex-col">
+                        <span>Email</span>
+                        <div class="input flex items-center">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input asp-for="Email" type="email" placeholder="Type your email">
+                        </div>
+                    </div>
+
+                    <div class="input-form flex flex-col">
+                        <span>Your password</span>
+                        <div class="input flex items-center">
+                            <i class="fa-solid fa-lock"></i>
+                            <input asp-for="Password" type="password" placeholder="Password must be at least 8 characters">
+                        </div>
+                    </div>
+
+                    <div class="input-form flex flex-col">
+                        <span>Confirm password</span>
+                        <div class="input flex items-center">
+                            <i class="fa-solid fa-lock"></i>
+                            <input asp-for="ConfirmPassword" type="password" placeholder="Confirm password">
+                        </div>
+                    </div>
+
+                    <div class="actions flex items-center just-between">
+                        <div class="checkbox flex items-center">
+                            <input asp-for="IsMentor" id="mentor" name="mentor" class="ui-checkbox">
+                            <label class="pointer" for="mentor" style="margin-left: 10px;">Mentor account</label>
+                        </div>
+
+                        <a class="link" href="./forgot-pass.html">Forgot password?</a>
+                    </div>
+
+                    <input type="submit" class="sign-in pointer" value="Sign Up" />
+                </form>
+
+                <div class="create-account flex items-center just-around">
+                    <span>Already have an account?</span>
+                    <a class="link" asp-action="SignIn">Sign in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/3c9b88224f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+</body>
+
+
+</html>

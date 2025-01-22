@@ -14,14 +14,11 @@ namespace Persistence.Configurations
 			builder.Property(m => m.Content).HasColumnType("nvarchar").HasMaxLength(150).IsRequired();
 			builder.Property(m => m.CourseId).HasColumnType("int").IsRequired();
 			builder.Property(m => m.UserId).HasColumnType("int").IsRequired();
-			builder.Property(m => m.CommentId).HasColumnType("int").IsRequired();
 
 			builder.ConfigureAuditable();
 
 			builder.HasKey(m => m.Id);
 			builder.ToTable("Comments");
-
-			// users
 
 			builder.HasOne<Course>()
 				.WithMany()

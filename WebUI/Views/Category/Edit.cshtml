@@ -1,0 +1,14 @@
+﻿@model CategoryDto
+@{
+    ViewData["Title"] = "Edit category";
+    Layout = "_Layout";
+}
+
+@section PageCss {
+    <link href="~/css/layout.css" rel="stylesheet" />
+}
+
+<form asp-action="Edit" method="post">
+    <input asp-for="Name" type="text" name="name" value="@Model.Name"/>
+    <input type="submit" name="name" value="Edit" />
+</form>

@@ -8,7 +8,7 @@ namespace WebUI.Services.Course
         public Task<ApiResponse<IEnumerable<CourseGetAllResponse>>> GetAllAsync(CancellationToken cancellationToken = default);
         public Task<ApiResponse<CourseGetByIdResponse>> GetByIdAsync(int id, CancellationToken cancellationToken = default);
         public Task<ApiResponse> AddAsync(CourseAddRequestDto request, CancellationToken cancellationToken = default);
-        public Task<ApiResponse> EditAsync(CourseDto request, CancellationToken cancellation = default);
+        public Task<ApiResponse> EditAsync(CourseEditDto request, CancellationToken cancellation = default);
         public Task RemoveAsync(int id, CancellationToken cancellation = default);
     }
 }

@@ -7,7 +7,7 @@ namespace Application.Modules.CommentModule.Commands
     {
         public string Content { get; set; }
         public int CourseId { get; set; }
-        public int UserId { get; set; } // use usermanager
+        public int UserId { get; set; }
         public int? CommentId { get; set; }
     }
 }

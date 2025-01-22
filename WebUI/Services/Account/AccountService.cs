@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Net.Mime;
-using System.Text;
-using WebUI.Models.common;
+﻿using WebUI.Models.common;
 using WebUI.Models.DTOs.Account;
 using WebUI.Services.common;
 
@@ -12,21 +9,13 @@ namespace WebUI.Services.Account
         public AccountService(IHttpClientFactory httpClientFactory, IConfiguration configuration) 
             : base(httpClientFactory, configuration) { }
 
-        public async Task<ApiResponse<SignInResponsetDto>> SignIn(SignInRequestDto request, CancellationToken cancellationToken = default)
-        {
-            var requestContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, MediaTypeNames.Application.Json);
-            var response = await client.PostAsync("/api/Account/signin", requestContent, cancellationToken);
+        public Task<ApiResponse<AuthentificationResponsetDto>> SignInAsync(AuthentificationRequestDto request, CancellationToken cancellationToken = default)
+            => base.PostAsync<AuthentificationRequestDto, ApiResponse<AuthentificationResponsetDto>>("/api/Account/signin", request, cancellationToken);
 
-            if (!response.IsSuccessStatusCode)
-                throw new BadHttpRequestException("HTTP_CLIENT");
-
-            var content = await response.Content.ReadAsStringAsync(cancellationToken);
-            var apiResponse = JsonConvert.DeserializeObject<ApiResponse<SignInResponsetDto>>(content)!;
-
-            if (!apiResponse.IsSuccess)
-                throw new BadHttpRequestException("HTTP_CLIENT");
-
-            return apiResponse;
-        }
+        public Task<ApiResponse<AuthentificationResponsetDto>> RefreshTokenAsync(RefreshTokenRequestDto request, CancellationToken cancellationToken = default)
+            => base.PostAsync<RefreshTokenRequestDto, ApiResponse<AuthentificationResponsetDto>>("/api/Account/refresh-token", request, cancellationToken);
+        
+        public Task<ApiResponse<AuthentificationResponsetDto>> SignUp(SignUpRequestDto request, CancellationToken cancellationToken = default)
+            => base.PostAsync<SignUpRequestDto, ApiResponse<AuthentificationResponsetDto>>("/api/Account/signup", request, cancellationToken);
     }
 }

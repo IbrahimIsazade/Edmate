@@ -6,14 +6,30 @@ using Repositories;
 
 namespace Application.Modules.FeatureModule.Commands.AddCommand
 {
-    internal class FeatureAddCommandRequestHandler(IFeatureRepository featureRepository, IBookRepository bookRepository, IEntityService entityService) : IRequestHandler<FeatureAddCommandRequest, Feature>
+    internal class FeatureAddCommandRequestHandler(
+        IFeatureRepository featureRepository, 
+        IBookRepository bookRepository, 
+        ICourseRepository courseRepository) : IRequestHandler<FeatureAddCommandRequest, Feature>
     {
         public async Task<Feature> Handle(FeatureAddCommandRequest request, CancellationToken cancellationToken)
         {
-            if (await bookRepository.GetAsync(m => m.Id == request.BookId, cancellationToken) == null)
-                throw new NotFoundException("Book not found");
+            var entity = new Feature()
+            {
+                Title = request.Title,
+                ItemId = request.ItemId,
+                IsCourseFeature = request.IsCourse,
+            };
 
-            return await entityService.AddAsync(request, featureRepository, cancellationToken);
+            if (await courseRepository.GetAsync(m => m.Id == request.ItemId, cancellationToken) != null
+                || await bookRepository.GetAsync(m => m.Id == request.ItemId, cancellationToken) != null)
+            {
+                await featureRepository.AddAsync(entity, cancellationToken);
+                await featureRepository.SaveAsync(cancellationToken);
+
+                return entity;
+            }
+
+            throw new NotFoundException("Entity not found (Handler)");
         }
     }
 }

@@ -12,18 +12,12 @@ namespace Persistence.Configurations
 		{
 			builder.Property(m => m.Id).HasColumnType("int").UseIdentityColumn(1, 1);
 			builder.Property(m => m.Title).HasColumnType("nvarchar").HasMaxLength(50).IsRequired();
-			builder.Property(m => m.BookId).HasColumnType("int").IsRequired();
+			builder.Property(m => m.ItemId).HasColumnType("int").IsRequired();
+			builder.Property(m => m.IsCourseFeature).HasColumnType("tinyint").IsRequired();
 
 			builder.ConfigureAuditable();
 			builder.HasKey(m => m.Id);
 			builder.ToTable("Features");
-
-			builder.HasOne<Book>()
-				.WithMany()
-				.HasPrincipalKey(m => m.Id)
-				.HasForeignKey(m => m.BookId)
-				.OnDelete(DeleteBehavior.NoAction);
 		}
 	}
-
 }

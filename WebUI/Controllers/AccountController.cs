@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WebUI.Models.DTOs.Account;
 using WebUI.Services.Account;
 
@@ -12,12 +11,22 @@ namespace WebUI.Controllers
         {
             return View();
         }
+        
+        public IActionResult SignUp()
+        {
+            return View();
+        }
 
         [HttpPost]
-        [Route("Account/SignIn")]
-        public async Task<IActionResult> SignIn(SignInRequestDto request)
+        public async Task<IActionResult> SignIn(AuthentificationRequestDto request)
         {
-            var response = await accountService.SignIn(request);
+            var response = await accountService.SignInAsync(request);
+
+            if (!response.IsSuccess)
+            {
+                ModelState.AddModelError("Password", "Name or password incorrect");
+                return View();
+            }
 
             Response.Cookies.Delete("accessToken");
             Response.Cookies.Delete("refreshToken");
@@ -40,6 +49,15 @@ namespace WebUI.Controllers
             }
 
             return RedirectToAction("Index", "Course");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignUp(SignUpRequestDto request)
+        {
+            request.IsMentor = true;
+            var response = await accountService.SignUp(request);
+
+            return RedirectToAction(nameof(SignIn));
         }
     }
 }

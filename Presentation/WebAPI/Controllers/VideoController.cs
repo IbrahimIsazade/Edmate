@@ -2,6 +2,7 @@
 using Application.Modules.VideoModule.Commands.VideoAddCommand;
 using Application.Modules.VideoModule.Commands.VideoDeleteCommand;
 using Application.Modules.VideoModule.Queries.VideoGetAllQuery;
+using Application.Modules.VideoModule.Queries.VideoGetByCourseIdQuery;
 using Application.Modules.VideoModule.Queries.VideoGetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -20,8 +21,17 @@ namespace WebAPI.Controllers
             return Ok(response);
         }
 
+        //[HttpGet("{id:int:min(1)}")]
+        //public async Task<IActionResult> GetById([FromQuery] VideoGetByIdQueryRequest request, int id)
+        //{
+        //    request.Id = id;
+        //    var res = await mediator.Send(request);
+        //    var response = ApiResponse.Success(res, StatusCodes.Status200OK);
+        //    return Ok(response);
+        //}
+
         [HttpGet("{id:int:min(1)}")]
-        public async Task<IActionResult> GetById([FromQuery] VideoGetByIdQueryRequest request, int id)
+        public async Task<IActionResult> GetByCourseId([FromQuery] VideoGetByCourseIdQueryRequest request, int id)
         {
             request.Id = id;
             var res = await mediator.Send(request);

@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @await RenderSectionAsync("PageCss", required: true)
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <title>@ViewData["Title"]</title>
 </head>
 
@@ -81,7 +81,7 @@
             <h4 style=" margin-top: 20px;">Admin tools</h4>
 
             <li class="flex flex-col items-center">
-                <a asp-controller="Categories" asp-action="Index" class="sidebar_menu_element flex">
+                <a asp-controller="Category" asp-action="Index" class="sidebar_menu_element flex">
                     <i class="fa-solid fa-icons"></i>
                     <span>Categories</span>
                 </a>

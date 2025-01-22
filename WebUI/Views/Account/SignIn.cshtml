@@ -1,4 +1,4 @@
-﻿@model SignInRequestDto
+﻿@model AuthentificationRequestDto
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "SignIn";
@@ -59,12 +59,14 @@
                         <a class="link" href="./forgot-pass.html">Forgot password</a>
                     </div>
 
+                    <span style="color: red; margin-top: 15px;" asp-validation-for="Password"></span>
+
                     <button class="sign-in pointer">Sign in</button>
                 </form>
 
                 <div class="create-account flex items-center just-around">
                     <span>New on our platform ?</span>
-                    <a class="link" href="./sign-up.html">Create account</a>
+                    <a class="link" asp-action="SignUp">Create account</a>
                 </div>
             </div>
         </div>

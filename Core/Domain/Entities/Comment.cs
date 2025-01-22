@@ -7,7 +7,6 @@ namespace Domain.Entities
         public int Id { get; set; }
         public string Content { get; set; }
         public int CourseId { get; set; }
-        public int UserId { get; set; } // use usermanager
-        public int? CommentId { get; set; }
+        public int UserId { get; set; }
     }
 }

@@ -58,7 +58,7 @@ namespace WebAPI
 
                 if (builder.Environment.IsDevelopment())
                 {
-                    cfg.Password.RequiredUniqueChars = 1;
+                    cfg.Password.RequiredUniqueChars = 0;
                     cfg.Password.RequiredLength = 3;
                     cfg.Password.RequireNonAlphanumeric = false;
                     cfg.Password.RequireUppercase = false;

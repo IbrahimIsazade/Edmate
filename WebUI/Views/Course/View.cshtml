@@ -1,0 +1,125 @@
+﻿@model CourseGetByIdResponse
+@{
+    ViewData["Title"] = "View course";
+    Layout = "_Layout";
+}
+
+@section PageCss {
+    <link rel="stylesheet" href="~/css/view-course.css">
+}
+
+<h2>@Model.CategoryName Course</h2>
+
+<div class="course-box flex just-between">
+    <div class="left-part flex flex-col just-center">
+        <div class="heading flex items-center just-around">
+            <div class="titling flex flex-col">
+                <h2 class="title">@Model.Title</h2>
+                <span class="author">By @Model.MentorName</span>
+            </div>
+
+            <span class="category-tag">@Model.CategoryName</span>
+
+            <i class="fa-solid fa-share-nodes pointer"></i>
+        </div>
+
+        @await Component.InvokeAsync("AllVideos", new { id = Model.Id })
+
+        <div class="description flex flex-col">
+            <h4>Description</h4>
+
+            <p>
+                @Model.Description
+            </p>
+
+        </div>
+
+        <div class="line"></div>
+
+        <div class="features flex flex-col">
+            <h4>Features of this course</h4>
+
+            @await Component.InvokeAsync("AllFeatures", new { id = Model.Id, isCourse = true })
+        </div>
+
+        <div class="line"></div>
+
+        <div class="author flex flex-col">
+            <h4>Author of course</h4>
+
+            <div class="mentor-profile flex items-center">
+                <img style="width: 40px; height: 40px; object-fit: cover;" src="@Model.MentorProfilePath" alt="profile">
+
+                <div class="username flex flex-col">
+                    <a class="pointer link">@Model.MentorName </a>
+                    <span>@Model.CategoryName</span> @*<--- ~NOTICE~ CHANGE TO MENTOR CATEGORY*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-part flex flex-col">
+        <div class="video-sequence flex flex-col items-center">
+            <div class="video pointer flex just-between items-center">
+                <h3>
+                    Introduction
+                </h3>
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+            <div class="video pointer flex just-between items-center">
+                <h3>
+                    Beginner tips
+                </h3>
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+            <div class="video pointer flex just-between items-center">
+                <h3>
+                    Advanced tips
+                </h3>
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+            <div class="video pointer flex just-between items-center">
+                <h3>
+                    Tasks
+                </h3>
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+        </div>
+
+        @*
+        <div class="comments-box flex flex-col items-center just-center">
+            <h3>Comments</h3>
+            @await Component.InvokeAsync("AllComments", new { id = Model.Id })
+
+            <div class="post-comment-box flex items-center just-between">
+                <form asp-controller="Comment" asp-action="PostComment" asp-route-id="@Model.Id" class="flex items-center just-between" method="post">
+                    <textarea placeholder="Drop your comment here..." name="content"></textarea>
+
+                    <input type="submit" class="pointer send-button"><i class="fa-solid fa-paper-plane"></i></input>
+                </form>
+            </div>
+        </div>
+        *@
+    </div>
+</div>
+
+@* <p>Id -> @Model.Id</p> *@
+@* <p>Title -> @Model.Title</p> *@
+@* <p>Desc -> @Model.Description</p> *@
+@* <p>CategoryName -> @Model.CategoryName</p> *@
+@* <br/> *@
+@* <p>MentorName -> @Model.MentorName</p> *@
+@* <p>MentorProfilePath -> @Model.MentorProfilePath</p> *@
+@* <p>MentorId -> @Model.MentorId</p> *@
+@* <br /> *@
+@* <p>Rating -> @Model.Rating</p> *@
+@* <p>ThumbnailPath -> @Model.ThumbnailPath</p> *@
+@* <p>AttachmentPath -> @Model.AttachmentPath</p> *@
+@* <p>Duration -> @Model.Duration</p> *@
+
+@* <h1>as files</h1> *@
+@* <img src="@Model.MentorProfilePath" alt="Alternate Text" /> *@
+@* <img src="@Model.ThumbnailPath" alt="Alternate Text" /> *@
+
+@* @await Component.InvokeAsync("AllVideos", new {id = Model.Id}) *@
+

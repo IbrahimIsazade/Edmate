@@ -13,7 +13,7 @@
         <div class="course-box flex flex-col just-between">
             <div class="top flex items-center just-between" style="width: 100%;">
                 <h2 class="title">Popular<span style="font-size: 12px;font-weight: 500;">(this month)</span></h2>
-                <a href="./create-course.html" class="pointer flex items-center just-between"><i class="fa-solid fa-plus" style="transition: .05s all; font-size: 15px;margin-top: 1px;margin-right: 2px;"></i> Create course</a>
+                <a asp-action="CreateCourse" class="pointer flex items-center just-between"><i class="fa-solid fa-plus" style="transition: .05s all; font-size: 15px;margin-top: 1px;margin-right: 2px;"></i> Create course</a>
             </div>
 
             <div class="courses popular-courses flex items-center just-around">
@@ -27,8 +27,7 @@
                         </div>
 
                         <div class="categories flex items-center">
-                            <span class="category">@item.CategoryName</span>
-                            @* <span class="category" style="margin-left: 10px;">Development</span> *@
+                            <span class="category">@item.CategoryName</span> @*<--- bu bir section olacaq hardaki butun kateqoriyalari gormek olcaq*@
                         </div>
 
                         <div class="course-name flex items-center">
@@ -58,14 +57,14 @@
                                 <i class="fa-solid fa-star"></i>
                                 <span>4.4 (12K)</span>
                             </div>
-                            <button class="view-course pointer">View course</button>
+                            <a asp-action="View" asp-route-id="@item.Id" class="view-course pointer">View course</a>
                         </div>
                     </div>
                 }
             </div>
         </div>
 
-        <div class="course-box flex flex-col just-between" style="height: 1000px;">
+        <div class="course-box flex flex-col just-between" style="height: @{((((Model.Count() - 1) % 4) + 1) * 500).ToString();}px;">
             <!--
             yuxarida, kurslarin sayini 4'e bolub onu 500'e vur ve height ver (4 dene kurs -> 500px, 5 dene kurs -> 1000px)
             Bunun ucun ChatGPT verdiyi bir Python kod:
@@ -92,212 +91,50 @@
             </div>
 
             <div class="courses all-courses flex flex-col just-between">
-                <div class="course-card flex flex-col just-between items-center">
-                    <div class="thumbnail flex items-center just-center">
-                        <img src="/img/course-img1.png" alt="course-img">
-                    </div>
+                @foreach (var item in Model)
+                {
+                    var durationInHours = item.Duration / 60.0;
 
-                    <div class="categories flex items-center">
-                        <span class="category">Web</span>
-                        <span class="category" style="margin-left: 10px;">Development</span>
-                    </div>
-
-                    <div class="course-name flex items-center">
-                        <h4>Full-Stack web development</h4>
-                    </div>
-
-                    <div class="author flex items-center">
-                        <img src="/img/profile.png" alt="">
-                        <span>Created by <b><a class="author-link" href="profile" style="transition: .2s all;">Jhon Doe</a></b></span>
-                    </div>
-
-                    <div class="line"></div>
-
-                    <div class="details flex items-center">
-                        <div class="lessons detail flex items-center just-center">
-                            <i class="fa-solid fa-video"></i>
-                            <span>24 Lessons</span>
+                    <div class="course-card flex flex-col just-between items-center">
+                        <div class="thumbnail flex items-center just-center">
+                            <img src="@item.ThumbnailPath" alt="course-img">
                         </div>
-                        <div class="duration detail flex items-center just-center" style="margin-left: 20px;">
-                            <i class="fa-solid fa-clock"></i>
-                            <span>40 Hours</span>
+
+                        <div class="categories flex items-center">
+                            <span class="category">@item.CategoryName</span> @*<--- bu bir section olacaq hardaki butun kateqoriyalari gormek olcaq*@
                         </div>
-                    </div>
 
-                    <div class="buttons flex items-center just-between">
-                        <div class="rating flex items-center just-center">
-                            <i class="fa-solid fa-star"></i>
-                            <span>4.4 (12K)</span>
+                        <div class="course-name flex items-center">
+                            <h4>@item.Title</h4>
                         </div>
-                        <button class="view-course pointer">View course</button>
-                    </div>
-                </div>
 
-                <div class="course-card flex flex-col just-between items-center">
-                    <div class="thumbnail flex items-center just-center">
-                        <img src="/img/course-img1.png" alt="course-img">
-                    </div>
-
-                    <div class="categories flex items-center">
-                        <span class="category">Web</span>
-                        <span class="category" style="margin-left: 10px;">Design</span>
-                    </div>
-
-                    <div class="course-name flex items-center">
-                        <h4>UI/UX web design</h4>
-                    </div>
-
-                    <div class="author flex items-center">
-                        <img src="/img/profile.png" alt="">
-                        <span>Created by <b><a class="author-link" href="profile" style="transition: .2s all;">Jhon Doe</a></b></span>
-                    </div>
-
-                    <div class="line"></div>
-
-                    <div class="details flex items-center">
-                        <div class="lessons detail flex items-center just-center">
-                            <i class="fa-solid fa-video"></i>
-                            <span>24 Lessons</span>
+                        <div class="author flex items-center">
+                            <img src="@item.MentorProfilePath" alt="">
+                            <span>Created by <b><a class="author-link" href="profile" style="transition: .2s all;">@item.MentorName</a></b></span>
                         </div>
-                        <div class="duration detail flex items-center just-center" style="margin-left: 20px;">
-                            <i class="fa-solid fa-clock"></i>
-                            <span>40 Hours</span>
+
+                        <div class="line"></div>
+
+                        <div class="details flex items-center">
+                            <div class="lessons detail flex items-center just-center">
+                                <i class="fa-solid fa-video"></i>
+                                <span>24 Lessons</span>
+                            </div>
+                            <div class="duration detail flex items-center just-center" style="margin-left: 20px;">
+                                <i class="fa-solid fa-clock"></i>
+                                <span>@durationInHours Hours</span>
+                            </div>
+                        </div>
+
+                        <div class="buttons flex items-center just-between">
+                            <div class="rating flex items-center just-center">
+                                <i class="fa-solid fa-star"></i>
+                                <span>4.4 (12K)</span>
+                            </div>
+                            <a asp-action="View" asp-route-id="@item.Id" class="view-course pointer">View course</a>
                         </div>
                     </div>
-
-                    <div class="buttons flex items-center just-between">
-                        <div class="rating flex items-center just-center">
-                            <i class="fa-solid fa-star"></i>
-                            <span>4.4 (12K)</span>
-                        </div>
-                        <button class="view-course pointer">View course</button>
-                    </div>
-                </div>
-
-                <div class="course-card flex flex-col just-between items-center">
-                    <div class="thumbnail flex items-center just-center">
-                        <img src="/img/course-img1.png" alt="course-img">
-                    </div>
-
-                    <div class="categories flex items-center">
-                        <span class="category">Game</span>
-                        <span class="category" style="margin-left: 10px;">Development</span>
-                    </div>
-
-                    <div class="course-name flex items-center">
-                        <h4>Advanced Unity game development</h4>
-                    </div>
-
-                    <div class="author flex items-center">
-                        <img src="/img/profile.png" alt="">
-                        <span>Created by <b><a class="author-link" href="profile" style="transition: .2s all;">Jhon Doe</a></b></span>
-                    </div>
-
-                    <div class="line"></div>
-
-                    <div class="details flex items-center">
-                        <div class="lessons detail flex items-center just-center">
-                            <i class="fa-solid fa-video"></i>
-                            <span>24 Lessons</span>
-                        </div>
-                        <div class="duration detail flex items-center just-center" style="margin-left: 20px;">
-                            <i class="fa-solid fa-clock"></i>
-                            <span>40 Hours</span>
-                        </div>
-                    </div>
-
-                    <div class="buttons flex items-center just-between">
-                        <div class="rating flex items-center just-center">
-                            <i class="fa-solid fa-star"></i>
-                            <span>4.4 (12K)</span>
-                        </div>
-                        <button class="view-course pointer">View course</button>
-                    </div>
-                </div>
-
-                <div class="course-card flex flex-col just-between items-center">
-                    <div class="thumbnail flex items-center just-center">
-                        <img src="/img/course-img1.png" alt="course-img">
-                    </div>
-
-                    <div class="categories flex items-center">
-                        <span class="category">Front-End</span>
-                        <span class="category" style="margin-left: 10px;">Dev</span>
-                        <span class="category" style="margin-left: 10px;">Advanced</span>
-                    </div>
-
-                    <div class="course-name flex items-center">
-                        <h4>NEXT.js development</h4>
-                    </div>
-
-                    <div class="author flex items-center">
-                        <img src="/img/profile.png" alt="">
-                        <span>Created by <b><a class="author-link" href="profile" style="transition: .2s all;">Jhon Doe</a></b></span>
-                    </div>
-
-                    <div class="line"></div>
-
-                    <div class="details flex items-center">
-                        <div class="lessons detail flex items-center just-center">
-                            <i class="fa-solid fa-video"></i>
-                            <span>24 Lessons</span>
-                        </div>
-                        <div class="duration detail flex items-center just-center" style="margin-left: 20px;">
-                            <i class="fa-solid fa-clock"></i>
-                            <span>40 Hours</span>
-                        </div>
-                    </div>
-
-                    <div class="buttons flex items-center just-between">
-                        <div class="rating flex items-center just-center">
-                            <i class="fa-solid fa-star"></i>
-                            <span>4.4 (12K)</span>
-                        </div>
-                        <button class="view-course pointer">View course</button>
-                    </div>
-                </div>
-
-                <div class="course-card flex flex-col just-between items-center">
-                    <div class="thumbnail flex items-center just-center">
-                        <img src="/img/course-img1.png" alt="course-img">
-                    </div>
-
-                    <div class="categories flex items-center">
-                        <span class="category">Front-End</span>
-                        <span class="category" style="margin-left: 10px;">Dev</span>
-                        <span class="category" style="margin-left: 10px;">Advanced</span>
-                    </div>
-
-                    <div class="course-name flex items-center">
-                        <h4>NEXT.js development</h4>
-                    </div>
-
-                    <div class="author flex items-center">
-                        <img src="/img/profile.png" alt="">
-                        <span>Created by <b><a class="author-link" href="profile" style="transition: .2s all;">Jhon Doe</a></b></span>
-                    </div>
-
-                    <div class="line"></div>
-
-                    <div class="details flex items-center">
-                        <div class="lessons detail flex items-center just-center">
-                            <i class="fa-solid fa-video"></i>
-                            <span>24 Lessons</span>
-                        </div>
-                        <div class="duration detail flex items-center just-center" style="margin-left: 20px;">
-                            <i class="fa-solid fa-clock"></i>
-                            <span>40 Hours</span>
-                        </div>
-                    </div>
-
-                    <div class="buttons flex items-center just-between">
-                        <div class="rating flex items-center just-center">
-                            <i class="fa-solid fa-star"></i>
-                            <span>4.4 (12K)</span>
-                        </div>
-                        <button class="view-course pointer">View course</button>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>

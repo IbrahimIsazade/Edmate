@@ -17,10 +17,10 @@ namespace WebUI.Services.Course
             => base.GetAsync<ApiResponse<CourseGetByIdResponse>>($"/api/Course/{id}", cancellation);
 
         public Task<ApiResponse> AddAsync(CourseAddRequestDto request, CancellationToken cancellation = default)
-            => base.PostAsync<CourseAddRequestDto, ApiResponse>("/api/Course", request, cancellation);
+            => base.PostAsync<CourseAddRequestDto, ApiResponse>("/api/Course", request, cancellation, true);
 
-        public Task<ApiResponse> EditAsync(CourseDto request, CancellationToken cancellation = default)
-            => base.PutAsync<CourseDto, ApiResponse>($"/api/Course/{request.Id}", request, cancellation);
+        public Task<ApiResponse> EditAsync(CourseEditDto request, CancellationToken cancellation = default)
+            => base.PutAsync<CourseEditDto, ApiResponse>($"/api/Course/{request.Id}", request, cancellation, true);
 
         public Task RemoveAsync(int id, CancellationToken cancellation = default)
             => base.DeleteAsync($"/api/Course/{id}", cancellation);

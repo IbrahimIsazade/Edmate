@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
+using Domain.Entities.Membership;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Persistence.Configurations.common;
 
 namespace Persistence.Configurations
 {
@@ -11,6 +11,8 @@ namespace Persistence.Configurations
 		public void Configure(EntityTypeBuilder<Mentor> builder)
 		{
 			builder.Property(m => m.Id).HasColumnType("int").UseIdentityColumn(1, 1);
+			builder.Property(m => m.IdentityId).HasColumnType("int").IsRequired();
+
 			builder.Property(m => m.FirstName).HasColumnType("nvarchar").HasMaxLength(30).IsRequired();
 			builder.Property(m => m.LastName).HasColumnType("nvarchar").HasMaxLength(30).IsRequired();
 			builder.Property(m => m.Location).HasColumnType("nvarchar").HasMaxLength(50).IsRequired();
@@ -25,7 +27,6 @@ namespace Persistence.Configurations
 			builder.Property(m => m.Likes).HasColumnType("int").IsRequired();
 			builder.Property(m => m.IsVerified).HasColumnType("tinyint").IsRequired();
 
-            builder.ConfigureAuditable();
             builder.HasKey(m => m.Id);
 			builder.ToTable("Mentors");
 
@@ -34,6 +35,12 @@ namespace Persistence.Configurations
 				.HasPrincipalKey(m => m.Id)
 				.HasForeignKey(m => m.CategoryId)
 				.OnDelete(DeleteBehavior.NoAction);
+
+			//builder.HasOne<CustomUser>()
+			//	.WithMany()
+			//	.HasPrincipalKey(m => m.Id)
+			//	.HasForeignKey(m => m.IdentityId)
+			//	.OnDelete(DeleteBehavior.NoAction);
 		}
 	}
 

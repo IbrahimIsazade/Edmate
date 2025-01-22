@@ -1,0 +1,13 @@
+﻿@model FeatureDto
+@{
+    Layout = "_Layout";
+}
+
+@section PageCss {
+    <link rel="stylesheet" href="~/css/view-course.css">
+}
+
+<form asp-action="Add" asp-route-id="@Model.ItemId" asp-route-boolean="@Model.IsCourseFeature" method="post">
+    <input asp-for=Title type="text" name="title" placeholder="Feature name" />
+    <input type="submit" value="Add" />
+</form>

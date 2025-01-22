@@ -6,7 +6,11 @@ using Repositories;
 
 namespace Application.Modules.CommentModule.Commands
 {
-    internal class CommentAddCommandRequestHandler(ICommentRepository commentRepository, ICourseRepository courseRepository, IEntityService entityService) : IRequestHandler<CommentAddCommandRequest, Comment>
+    internal class CommentAddCommandRequestHandler(
+        ICommentRepository commentRepository,
+        ICourseRepository courseRepository,
+        IEntityService entityService,
+        IIdentityService identityService) : IRequestHandler<CommentAddCommandRequest, Comment>
     {
         public async Task<Comment> Handle(CommentAddCommandRequest request, CancellationToken cancellationToken)
         {
@@ -15,6 +19,8 @@ namespace Application.Modules.CommentModule.Commands
 
             if (await courseRepository.GetAsync(m => m.Id == request.CourseId) == null)
                 throw new NotFoundException("Course not found");
+
+            request.UserId = identityService.UserId;
 
             return await entityService.AddAsync(request, commentRepository, cancellationToken);
         }

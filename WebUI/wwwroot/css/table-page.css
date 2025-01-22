@@ -1,0 +1,78 @@
+@import url(/css/layout.css);
+.main .head-part .input {
+  width: 20%;
+  background-color: white;
+  border-radius: 20px;
+  padding: 0px 10px;
+  outline: 1px solid white;
+  transition: 0.2s all;
+}
+.main .head-part .input i {
+  color: #667797;
+  font-size: large;
+}
+.main .head-part .input input {
+  height: 40px;
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: none;
+}
+.main .head-part .input:focus-within {
+  outline: 1px solid #3479F9;
+}
+.main .table {
+  background-color: white;
+  border-radius: 20px;
+  padding: 15px;
+  margin-top: 20px;
+  color: #667797;
+}
+.main .table thead tr th {
+  width: 42%;
+  border-bottom: 1.5px solid lightgray;
+  padding: 10px 0px;
+  font-weight: 600;
+}
+.main .table tbody tr td {
+  padding-top: 15px;
+}
+.main .table tbody tr td img {
+  width: 42px;
+  height: 42px;
+  border-radius: 100px;
+}
+.main .table tbody tr td a {
+  color: #667797;
+  margin-left: 10px;
+  transition: 0.2s all;
+}
+.main .table tbody tr td a:hover {
+  color: #3479F9;
+}
+.main .table tbody tr td .fa-solid {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  cursor: pointer;
+}
+.main .table tbody tr td .fa-solid::before {
+  text-align: center;
+  color: white;
+}
+.main .table tbody tr td .fa-solid:hover {
+  scale: 1.1;
+  box-shadow: 0px 0px 10px lightgray;
+}
+.main .table tbody tr td .fa-eye {
+  background-color: #3479F9;
+}
+.main .table tbody tr td .fa-pen {
+  background-color: #ffbe4f;
+}
+.main .table tbody tr td .fa-trash-can {
+  background-color: #ff5858;
+}/*# sourceMappingURL=table-page.css.map */

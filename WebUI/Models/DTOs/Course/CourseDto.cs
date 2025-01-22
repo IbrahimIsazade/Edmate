@@ -14,6 +14,15 @@ namespace WebUI.Models.DTOs.Course
         public required int Duration { get; set; } // int represents minutes. FE: 200 -> 2h 20m
     }
 
+    public class CourseEditDto
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public int? CategoryId { get; set; }
+        public IFormFile? Thumbnail { get; set; }
+    }
+
     public class CourseAddRequestDto
     {
         public string Title { get; set; }

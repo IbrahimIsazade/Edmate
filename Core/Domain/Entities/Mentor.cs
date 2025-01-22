@@ -2,9 +2,10 @@
 
 namespace Domain.Entities
 {
-    public class Mentor : AuditableEntity, IEntity, IAuditableEntity
+    public class Mentor : IEntity
     {
         public int Id { get; set; }
+        public int IdentityId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Location { get; set; }

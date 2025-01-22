@@ -15,8 +15,13 @@ namespace Application.Modules.CourseModule.Commands.CourseEditCommand
         {
             var course = await courseRepository.GetAsync(m => m.Id == request.Id);
 
-            if (await categoryRepository.GetAsync(m => m.Id == request.CategoryId) == null)
-                throw new NotFoundException("Category not found");
+            if (request.CategoryId != null)
+            {
+                if (await categoryRepository.GetAsync(m => m.Id == request.CategoryId) == null)
+                    throw new NotFoundException("Category not found");
+                else
+                    course.CategoryId = (int)request.CategoryId;
+            }
 
             if (request.Thumbnail != null)
             {
@@ -26,7 +31,6 @@ namespace Application.Modules.CourseModule.Commands.CourseEditCommand
 
             course.Title = request.Title;
             course.Description = request.Description;
-            course.CategoryId = request.CategoryId;
 
             courseRepository.Edit(course);
             await courseRepository.SaveAsync(cancellationToken);

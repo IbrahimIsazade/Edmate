@@ -5,7 +5,8 @@ namespace Application.Modules.FeatureModule.Commands.AddCommand
 {
     public class FeatureAddCommandRequest : IRequest<Feature>
     {
-        public required string Title { get; set; }
-        public required int BookId { get; set; }
+        public string Title { get; set; }
+        public int ItemId { get; set; }
+        public bool IsCourse { get; set; }
     }
 }

@@ -17,10 +17,10 @@ namespace WebUI.Services.Mentor
             => base.GetAsync<ApiResponse<MentorDto>>($"/api/Mentor/{id}", cancellation);
 
         public Task<ApiResponse> AddAsync(MentorDto request, CancellationToken cancellation = default)
-            => base.PostAsync<MentorDto, ApiResponse>("/api/Mentor", request, cancellation);
+            => base.PostAsync<MentorDto, ApiResponse>("/api/Mentor", request, cancellation, true);
 
         public Task<ApiResponse> EditAsync(MentorDto request, CancellationToken cancellation = default)
-            => base.PutAsync<MentorDto, ApiResponse>($"/api/Mentor/{request.Id}", request, cancellation);
+            => base.PutAsync<MentorDto, ApiResponse>($"/api/Mentor/{request.Id}", request, cancellation, true);
 
         public Task RemoveAsync(int id, CancellationToken cancellation = default)
             => base.DeleteAsync($"/api/Mentor/{id}", cancellation);

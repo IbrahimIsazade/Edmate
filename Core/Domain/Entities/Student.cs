@@ -4,12 +4,12 @@ namespace Domain.Entities
 {
     public class Student : IEntity
     {
-        public required int Id { get; set; }
-        public required string FirstName { get; set; }
-        public required string LastName { get; set; }
-        public required string Email { get; set; }
-        public required string ProfileImagePath { get; set; }
-        public required bool IsStudying { get; set; }
-        public required int PlanId { get; set; }
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string ProfileImagePath { get; set; }
+        public bool IsStudying { get; set; }
+        public int PlanId { get; set; }
     }
 }

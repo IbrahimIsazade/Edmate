@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{id:int:min(1)}")]
-        public async Task<IActionResult> Edit([FromQuery] CourseEditCommandRequest request, int id)
+        public async Task<IActionResult> Edit([FromForm] CourseEditCommandRequest request, int id)
         {
             request.Id = id;
             var res = await mediator.Send(request);

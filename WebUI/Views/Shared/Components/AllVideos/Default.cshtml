@@ -1,0 +1,8 @@
+﻿@model IEnumerable<VideoDto>
+
+@foreach (var item in Model)
+{
+    <video controls="controls" style="border-radius: 10px;">
+        <source src="@item.VideoPath" type="video/mp4" />
+    </video>
+}

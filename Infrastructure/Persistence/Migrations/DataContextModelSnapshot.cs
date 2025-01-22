@@ -233,10 +233,6 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CommentId")
-                        .IsRequired()
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -345,9 +341,6 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BookId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("CreatedAt")
                         .IsRequired()
                         .HasColumnType("datetime");
@@ -359,6 +352,12 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<int?>("DeletedBy")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("IsCourseFeature")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedAt")
@@ -373,8 +372,6 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookId");
 
                     b.ToTable("Features", (string)null);
                 });
@@ -633,19 +630,6 @@ namespace Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar");
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .IsRequired()
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<int?>("DeletedBy")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -660,6 +644,9 @@ namespace Persistence.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Following")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdentityId")
                         .HasColumnType("int");
 
                     b.Property<byte>("IsVerified")
@@ -677,12 +664,6 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar");
-
-                    b.Property<DateTime?>("ModifiedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<int?>("ModifiedBy")
-                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -936,15 +917,6 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Entities.Mentor", null)
                         .WithMany()
                         .HasForeignKey("MentorId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.Feature", b =>
-                {
-                    b.HasOne("Domain.Entities.Book", null)
-                        .WithMany()
-                        .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
