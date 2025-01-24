@@ -13,7 +13,7 @@ namespace Application.Modules.CourseModule.Queries.CourseGetByIdQuery
     {
         public async Task<CourseGetByIdResponse> Handle(CourseGetByIdQueryRequest request, CancellationToken cancellationToken)
         {
-            var response = await (from course in courseRepository.GetAll()
+            var response = await (from course in courseRepository.GetAll() where course.Id == request.Id
                            join mentor in mentorRepository.GetAll() on course.MentorId equals mentor.Id
                            join category in categoryRepository.GetAll() on course.CategoryId equals category.Id
                            select new CourseGetByIdResponse()

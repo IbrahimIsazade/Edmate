@@ -6,13 +6,38 @@ using Application.Modules.CourseModule.Queries.CourseGetAllQuery;
 using Application.Modules.CourseModule.Queries.CourseGetByIdQuery;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Repositories;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CourseController(IMediator mediator) : ControllerBase
+    public class CourseController(IMediator mediator, ICourseRepository courseRepository) : ControllerBase
     {
+        [HttpGet("{page:int:min(1)}/{size:int:min(2)}")]
+        public async Task<IActionResult> GetAll(int page, int size)
+        {
+            var query = courseRepository.GetAll();
+
+            var recordCount = query.Count();
+
+            var pages = (int)Math.Ceiling((page * 1D) / size);
+
+            var data = query
+                .Skip( (page - 1) * size)
+                .Take(size)
+                .ToList();
+
+            return Ok(new
+            {
+                page,
+                pages,
+                size,
+                count = recordCount,
+                data = data
+            });
+        }
+        
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] CourseGetAllQueryRequest request)
         {

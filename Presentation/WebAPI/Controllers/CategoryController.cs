@@ -2,6 +2,7 @@
 using Application.Modules.CategoryModule.Commands.CategoryAddCommand;
 using Application.Modules.CategoryModule.Commands.CategoryDeleteCommand;
 using Application.Modules.CategoryModule.Commands.CategoryEditCommand;
+using Application.Modules.CategoryModule.Queries.CategoryGetAllPagedQuery;
 using Application.Modules.CategoryModule.Queries.CategoryGetAllQuery;
 using Application.Modules.CategoryModule.Queries.CategoryGetByIdQuery;
 using MediatR;
@@ -13,6 +14,13 @@ namespace WebAPI.Controllers
     [ApiController]
     public class CategoryController(IMediator mediator) : ControllerBase
     {
+        [HttpGet("{page:int:min(1)}/{size:int:min(2)}")]
+        public async Task<IActionResult> GetAll([FromBody] CategoryGetAllPagedRequest request)
+        {
+            var response = await mediator.Send(request);
+            return Ok(response);
+        }
+        
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] CategoryGetAllQueryRequest request)
         {

@@ -12,7 +12,7 @@
 
 <div class="course-box flex just-between">
     <div class="left-part flex flex-col just-center">
-        <div class="heading flex items-center just-around">
+        <div class="heading flex items-center just-between">
             <div class="titling flex flex-col">
                 <h2 class="title">@Model.Title</h2>
                 <span class="author">By @Model.MentorName</span>
@@ -22,8 +22,8 @@
 
             <i class="fa-solid fa-share-nodes pointer"></i>
         </div>
-
-        @await Component.InvokeAsync("AllVideos", new { id = Model.Id })
+        <br />
+        @await Component.InvokeAsync("AllVideos", new { id = Model.Id, orderNumber = 0})
 
         <div class="description flex flex-col">
             <h4>Description</h4>

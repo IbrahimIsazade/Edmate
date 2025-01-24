@@ -34,6 +34,8 @@ namespace WebUI
             builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             builder.Services.AddHttpContextAccessor();
 
+            builder.Services.AddRouting(cfg => cfg.LowercaseUrls = true);
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

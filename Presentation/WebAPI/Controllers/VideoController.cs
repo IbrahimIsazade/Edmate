@@ -30,8 +30,8 @@ namespace WebAPI.Controllers
         //    return Ok(response);
         //}
 
-        [HttpGet("{id:int:min(1)}")]
-        public async Task<IActionResult> GetByCourseId([FromQuery] VideoGetByCourseIdQueryRequest request, int id)
+        [HttpPost("{id:int:min(1)}")]
+        public async Task<IActionResult> GetByCourseId([FromRoute] VideoGetByCourseIdQueryRequest request, int id)
         {
             request.Id = id;
             var res = await mediator.Send(request);

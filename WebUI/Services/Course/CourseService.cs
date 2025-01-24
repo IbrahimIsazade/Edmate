@@ -15,6 +15,8 @@ namespace WebUI.Services.Course
 
         public Task<ApiResponse<CourseGetByIdResponse>> GetByIdAsync(int id, CancellationToken cancellation = default)
             => base.GetAsync<ApiResponse<CourseGetByIdResponse>>($"/api/Course/{id}", cancellation);
+        public Task<ApiResponse<IEnumerable<CourseGetAllResponse>>> GetAllPagedAsync(CancellationToken cancellationToken = default)
+            => throw new NotImplementedException(); // base.DeleteAsync($"/api/Course/", cancellationToken);
 
         public Task<ApiResponse> AddAsync(CourseAddRequestDto request, CancellationToken cancellation = default)
             => base.PostAsync<CourseAddRequestDto, ApiResponse>("/api/Course", request, cancellation, true);

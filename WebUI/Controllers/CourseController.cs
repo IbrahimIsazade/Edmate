@@ -4,7 +4,7 @@ using WebUI.Services.Course;
 
 namespace WebUI.Controllers
 {
-    public class CourseController( ICourseService courseService ) : Controller
+    public class CourseController(ICourseService courseService) : Controller
     {
         public async Task<IActionResult> Index()
         {
@@ -18,8 +18,9 @@ namespace WebUI.Controllers
             return View(courses.Data);
         }
 
-        public async Task<IActionResult> View(int id)
+        public async Task<IActionResult> View(int id, int orderNumber)
         {
+            Console.WriteLine(orderNumber);
             var courses = await courseService.GetByIdAsync(id);
 
             return View(courses.Data);
