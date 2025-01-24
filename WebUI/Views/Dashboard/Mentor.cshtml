@@ -1,0 +1,229 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Mentor Dashboard";
+}
+
+@section PageCss {
+    <link rel="stylesheet" href="~/css/dashboard.css">
+    <style>
+        .main {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="/js/mentor-dashboard.js" defer></script>
+}
+
+<div class="grid">
+
+    <div class="grid-item chart-grid-item flex flex-col">
+
+        <div class="text flex flex-col just-center">
+            <h3>20+</h3>
+            <span>Created Courses</span>
+        </div>
+
+
+        <div class="chart flex items-center just-between">
+            <div class="icon blue flex items-center just-center">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+            <div style="border-radius: 20px;" id="chart-1"></div>
+        </div>
+    </div>
+
+    <div class="grid-item chart-grid-item flex flex-col">
+
+        <div class="text flex flex-col just-center">
+            <h3>5+</h3>
+            <span>Earned Awards</span>
+        </div>
+
+        <div class="chart flex items-center just-between">
+            <div class="icon green flex items-center just-center">
+                <i class="fa-solid fa-award"></i>
+            </div>
+            <div style="border-radius: 20px;" id="chart-2"></div>
+        </div>
+    </div>
+
+    <div class="grid-item chart-grid-item flex flex-col">
+
+        <div class="text flex flex-col just-center">
+            <h3>250K+</h3>
+            <span>Course views</span>
+        </div>
+
+        <div class="chart flex items-center just-between">
+            <div class="icon purple flex items-center just-center">
+                <i class="fa-solid fa-eye"></i>
+            </div>
+            <div style="border-radius: 20px;" id="chart-3"></div>
+        </div>
+    </div>
+
+    <div class="grid-item chart-grid-item flex flex-col">
+
+        <div class="text flex flex-col just-center">
+            <h3>100K+</h3>
+            <span>Followers</span>
+        </div>
+
+        <div class="chart flex items-center just-between">
+            <div class="icon orange flex items-center just-center">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div style="border-radius: 20px;" id="chart-4"></div>
+        </div>
+    </div>
+
+    <div class="grid-item flex flex-col grid-study-chart c-full">
+        <div style="border-radius: 20px;" id="chart-5"></div>
+    </div>
+
+    <div class="grid-item flex flex-col r-third c-full ">
+        <span class="title">
+            Top Courses Picked for You
+        </span>
+
+        <div class="courses flex items-center just-center">
+
+            <div class="course flex flex-col">
+
+                <div class="image flex items-center just-center">
+                    <img src="/img/course-img1.png" alt="image">
+                </div>
+
+                <span class="category dev">Development</span>
+
+                <h6 class="title">Full Stack Web Development</h6>
+
+                <a class="author flex items-center">
+                    <img class="profile-img" ` src="/img/profile.png" alt="profile">
+
+                    <span>
+                        Created by <b>Zakir Aliyev</b><i class="fa-solid fa-circle-check"
+                                                         style="color: #3479f9;"></i>
+                    </span>
+                </a>
+
+                <hr>
+
+                <div class="info flex items-center">
+                    <div class="lessons flex items-center">
+                        <i class="fa-solid fa-video"></i>
+                        <span>24 Lessons</span>
+                    </div>
+
+                    <div class="hours flex items-center">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>40 Hours</span>
+                    </div>
+                </div>
+
+                <div class="actions flex items-center just-between">
+                    <div class="rating flex items-center">
+                        <i class="fa-solid fa-star"></i>
+                        <span>4.9 (12K)</span>
+                    </div>
+
+                    <a class="pointer">
+                        View Course
+                    </a>
+                </div>
+            </div>
+
+            <div class="course flex flex-col">
+
+                <div class="image flex items-center just-center">
+                    <img src="/img/course-img1.png" alt="image">
+                </div>
+
+                <span class="category design">Design</span>
+
+                <h6 class="title">Full Professional Web Design Course</h6>
+
+                <a class="author flex items-center">
+                    <img class="profile-img" ` src="/img/profile.png" alt="profile">
+
+                    <span>Created by <b>Mehdi Abbasov</b></span>
+                </a>
+
+                <hr>
+
+                <div class="info flex items-center">
+                    <div class="lessons flex items-center">
+                        <i class="fa-solid fa-video"></i>
+                        <span>24 Lessons</span>
+                    </div>
+
+                    <div class="hours flex items-center">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>40 Hours</span>
+                    </div>
+                </div>
+
+                <div class="actions flex items-center just-between">
+                    <div class="rating flex items-center">
+                        <i class="fa-solid fa-star"></i>
+                        <span>4.9 (12K)</span>
+                    </div>
+
+                    <a class="pointer">
+                        View Course
+                    </a>
+                </div>
+            </div>
+
+            <div class="course flex flex-col">
+
+                <div class="image flex items-center just-center">
+                    <img src="/img/course-img1.png" alt="image">
+                </div>
+
+                <span class="category front">Frontend</span>
+
+                <h6 class="title">From Beginner To Senior Front-End Development</h6>
+
+                <a class="author flex items-center">
+                    <img class="profile-img" ` src="/img/profile.png" alt="profile">
+
+                    <span>
+                        Created by <b>Alixan Ekb...</b><i class="fa-solid fa-circle-check"
+                                                          style="color: #3479f9;"></i>
+                    </span>
+                </a>
+
+                <hr>
+
+                <div class="info flex items-center">
+                    <div class="lessons flex items-center">
+                        <i class="fa-solid fa-video"></i>
+                        <span>24 Lessons</span>
+                    </div>
+
+                    <div class="hours flex items-center">
+                        <i class="fa-solid fa-clock"></i>
+                        <span>40 Hours</span>
+                    </div>
+                </div>
+
+                <div class="actions flex items-center just-between">
+                    <div class="rating flex items-center">
+                        <i class="fa-solid fa-star"></i>
+                        <span>4.9 (12K)</span>
+                    </div>
+
+                    <a class="pointer">
+                        View Course
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-right">

@@ -9,8 +9,8 @@ namespace Application.Services
 {
     public interface IAproximateTimeService
     {
-        public Task<int> GetApproximateReadingTime(IFormFile file);
-        public Task<int> GetVideoDuration(IFormFile videoFile);
+        public Task<int> GetApproximateReadingTimeAsync(IFormFile file);
+        public Task<int> GetVideoDurationAsync(IFormFile videoFile);
         public int CountWords(string text);
     }
 }

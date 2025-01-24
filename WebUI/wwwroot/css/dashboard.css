@@ -1,0 +1,190 @@
+@import url(layout.css);
+.main .grid {
+  height: -moz-max-content;
+  height: max-content;
+}
+.main .grid .chart-grid-item .text span {
+  margin-left: 0;
+  margin-top: 5px;
+}
+.main .grid .chart-grid-item .chart {
+  height: 80px;
+}
+.main .grid .chart-grid-item .chart .icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: white;
+  margin-top: 10px;
+}
+.main .grid .chart-grid-item .chart .icon i {
+  font-size: 22px;
+}
+.main .grid .courses {
+  height: 86%;
+}
+.main .grid .courses .course {
+  margin-top: 30px;
+  margin-left: 20px;
+  width: 30%;
+  height: 100%;
+  border-radius: 12px;
+  border: #e4e4e4 2px solid;
+  padding: 8px;
+  transition: 0.2s all;
+}
+.main .grid .courses .course:hover {
+  border-color: rgba(102, 119, 151, 0.4274509804);
+}
+.main .grid .courses .course i {
+  font-size: 16px;
+}
+.main .grid .courses .course .image {
+  width: 100%;
+  background-color: #D8E6FE;
+  padding: 10px;
+  border-radius: 10px;
+}
+.main .grid .courses .course .category {
+  margin-top: 8px;
+  margin-left: 2px;
+  width: -moz-max-content;
+  width: max-content;
+  border-radius: 10px;
+  padding: 3px 8px;
+  font-size: 13px;
+}
+.main .grid .courses .course .category.dev {
+  background-color: #e0ffe8;
+  color: #4e8e5e;
+}
+.main .grid .courses .course .category.design {
+  background-color: #FFF5ED;
+  color: #FF9F43;
+}
+.main .grid .courses .course .category.front {
+  background-color: #FDF1F1;
+  color: #EA5455;
+}
+.main .grid .courses .course .title {
+  height: 50px;
+  margin-top: 10px;
+  margin-left: 5px;
+  font-size: 18px;
+}
+.main .grid .courses .course .author {
+  margin-top: 30px;
+  margin-left: 5px;
+  transition: 0.2s all;
+}
+.main .grid .courses .course .author i {
+  font-size: 14px;
+}
+.main .grid .courses .course .author b {
+  cursor: pointer;
+  transition: 0.2s all;
+}
+.main .grid .courses .course .author b:hover {
+  color: #3479f9;
+  text-decoration: underline;
+}
+.main .grid .courses .course .author .shrek {
+  width: 30px;
+}
+.main .grid .courses .course .author .profile-img {
+  width: 30px;
+}
+.main .grid .courses .course hr {
+  margin-top: 15px;
+  height: 1px;
+  background-color: #dddddd;
+  border: none;
+}
+.main .grid .courses .course .info {
+  margin-top: 25px;
+}
+.main .grid .courses .course .info i {
+  color: #3479f9;
+}
+.main .grid .courses .course .info .hours {
+  margin-left: 10px;
+}
+.main .grid .courses .course .info span {
+  margin-left: 5px;
+}
+.main .grid .courses .course .actions {
+  margin-top: 25px;
+}
+.main .grid .courses .course .actions .rating i {
+  color: orange;
+  font-size: 16px;
+}
+.main .grid .courses .course .actions span {
+  margin-left: 0;
+}
+.main .grid .courses .course .actions a {
+  border: #3479f9 1px solid;
+  border-radius: 50px;
+  color: #3479f9;
+  background-color: white;
+  padding: 8px 15px;
+  font-size: 16px;
+  transition: 0.2s all;
+}
+.main .grid .courses .course .actions a:hover {
+  background-color: #3479f9;
+  color: white;
+}
+.main .grid-right {
+  width: 24%;
+  height: -moz-max-content;
+  height: max-content;
+  padding-left: 5px;
+  grid-template-rows: 320px 320px 320px;
+  grid-template-columns: 290px;
+}
+.main .grid-right .title a {
+  font-size: 14px;
+  font-weight: normal;
+}
+.main .grid-right .assignments {
+  margin-top: 10px;
+}
+.main .grid-right .assignments .assignment {
+  width: 100%;
+  border: 1px solid #D5DBE7;
+  border-radius: 10px;
+  padding: 10px;
+  transition: 0.2s all;
+  margin-top: 10px;
+}
+.main .grid-right .assignments .assignment .icon {
+  width: 50px;
+  height: 50px;
+  padding: 10px;
+  background-color: #ECF2FE;
+  border-radius: 50%;
+}
+.main .grid-right .assignments .assignment .icon i {
+  width: 20px;
+  height: 20px;
+  color: #3479f9;
+}
+.main .grid-right .assignments .assignment .title {
+  font-size: 15px;
+}
+.main .grid-right .assignments .assignment .deadline {
+  font-size: 12px;
+}
+.main .grid-right .assignments .assignment:hover {
+  border-color: #667797;
+}
+.main .grid-right .itm1 {
+  grid-row: 1/2;
+}
+.main .grid-right .itm2 {
+  grid-row: 2/3;
+}
+.main .grid-right .itm3 {
+  grid-row: 3/4;
+}/*# sourceMappingURL=dashboard.css.map */

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using WebUI.Binders.BooleanBinder;
 using WebUI.Services.Account;
@@ -17,7 +18,7 @@ namespace WebUI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddSingleton<ProxyAuthorizationMessageHandler>();
+            builder.Services.AddTransient<ProxyAuthorizationMessageHandler>();
             builder.Services.AddHttpClient("httpClient").AddHttpMessageHandler<ProxyAuthorizationMessageHandler>();   
             builder.Services.AddControllersWithViews(cfg =>
             {
@@ -36,6 +37,15 @@ namespace WebUI
 
             builder.Services.AddRouting(cfg => cfg.LowercaseUrls = true);
 
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                options.Limits.MaxRequestBodySize = 300 * 1024 * 1024;
+            });
+
+            builder.Services.Configure<FormOptions>(options => {
+                options.MultipartBodyLengthLimit = 1024 * 1024 * 300; // 300 MB
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -51,6 +61,9 @@ namespace WebUI
 
             app.UseAuthorization();
             app.UseStatusCodePagesWithReExecute("/Account/Login");
+
+            app.MapControllerRoute(name: "areas",
+                pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",

@@ -140,9 +140,8 @@ namespace WebAPI
                 }
             });
 
-            builder.Services.Configure<FormOptions>(options =>
-            {
-                options.MultipartBodyLengthLimit = 104857600;
+            builder.Services.Configure<FormOptions>(options => {
+                options.MultipartBodyLengthLimit = 1024 * 1024 * 300; // 300 MB
             });
 
             builder.Services.AddCors(options =>

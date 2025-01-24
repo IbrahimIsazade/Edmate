@@ -6,7 +6,7 @@ namespace WebUI.ViewComponents
 {
     public class AllVideosViewComponent(IVideoService videoService) : ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync(int id, int? orderNumber = null, string view = null)
+        public async Task<IViewComponentResult> InvokeAsync(int id, int? orderNumber = -1, string view = null)
         {
             var request = new VideoGetByCourseIdQueryRequest
             {

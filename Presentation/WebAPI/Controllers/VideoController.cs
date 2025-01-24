@@ -30,16 +30,22 @@ namespace WebAPI.Controllers
         //    return Ok(response);
         //}
 
-        [HttpPost("{id:int:min(1)}")]
-        public async Task<IActionResult> GetByCourseId([FromRoute] VideoGetByCourseIdQueryRequest request, int id)
+        [HttpGet("{id:int:min(1)}/{orderNumber:int:min(-1)}")]
+        public async Task<IActionResult> GetByCourseId(int id, int orderNumber)
         {
-            request.Id = id;
+            var request = new VideoGetByCourseIdQueryRequest
+            {
+                Id = id,
+                OrderNumber = orderNumber
+            };
+
             var res = await mediator.Send(request);
             var response = ApiResponse.Success(res, StatusCodes.Status200OK);
             return Ok(response);
         }
 
         [HttpPost]
+        [DisableRequestSizeLimit]
         public async Task<IActionResult> Add([FromForm] VideoAddCommandRequest request)
         {
             var res = await mediator.Send(request);

@@ -18,8 +18,8 @@
 
             <div class="courses popular-courses flex items-center just-around">
                 @foreach (var item in Model)
-                { 
-                    var durationInHours = item.Duration / 60.0;
+                {
+                    var durationInHours = Math.Round(item.Duration / 60.0, 1);
 
                     <div class="course-card flex flex-col just-between items-center">
                         <div class="thumbnail flex items-center just-center">
@@ -57,7 +57,7 @@
                                 <i class="fa-solid fa-star"></i>
                                 <span>4.4 (12K)</span>
                             </div>
-                            <a asp-action="View" asp-route-id="@item.Id" class="view-course pointer">View course</a>
+                            <a asp-action="View" asp-route-id="@item.Id" asp-route-orderNumber="0" class="view-course pointer">View course</a>
                         </div>
                     </div>
                 }
@@ -93,7 +93,7 @@
             <div class="courses all-courses flex flex-col just-between">
                 @foreach (var item in Model)
                 {
-                    var durationInHours = item.Duration / 60.0;
+                    var durationInHours = Math.Round(item.Duration / 60.0, 1);
 
                     <div class="course-card flex flex-col just-between items-center">
                         <div class="thumbnail flex items-center just-center">
@@ -131,7 +131,7 @@
                                 <i class="fa-solid fa-star"></i>
                                 <span>4.4 (12K)</span>
                             </div>
-                            <a asp-action="View" asp-route-id="@item.Id" class="view-course pointer">View course</a>
+                            <a asp-action="View" asp-route-id="@item.Id" asp-route-orderNumber="0" class="view-course pointer">View course</a>
                         </div>
                     </div>
                 }

@@ -1,0 +1,14 @@
+﻿@model IEnumerable<VideoDto>
+
+<div class="video-sequence flex flex-col items-center">
+    @foreach (var item in Model)
+    {
+        <a asp-action="View" asp-route-orderNumber="@item.OrderNumber" class="video pointer flex just-between items-center">
+            <h3>
+                @item.Title
+            </h3>
+            <i class="fa-solid fa-angle-right"></i>
+        </a>
+    }
+    
+</div>

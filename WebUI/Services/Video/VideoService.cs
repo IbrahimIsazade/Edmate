@@ -14,7 +14,7 @@ namespace WebUI.Services.Video
             => base.GetAsync<ApiResponse<VideoDto>>($"/api/Video/{id}", cancellation);
 
         public Task<ApiResponse<IEnumerable<VideoDto>>> GetByCourseIdAsync(VideoGetByCourseIdQueryRequest request, CancellationToken cancellation = default)
-            => base.PostAsync<VideoGetByCourseIdQueryRequest, ApiResponse<IEnumerable<VideoDto>>>($"/api/Video/{request.Id}", request, cancellation, true);
+            => base.GetAsync<ApiResponse<IEnumerable<VideoDto>>>($"/api/Video/{request.Id}/{request.OrderNumber}", cancellation);
 
         public Task<ApiResponse> AddAsync(VideoRequestDto request, CancellationToken cancellation = default)
             => base.PostAsync<VideoRequestDto, ApiResponse>("/api/Video", request, cancellation, true);

@@ -19,12 +19,22 @@
 
         <!-- Sidebar Start -->
         <ul class="sidebar_menus_container flex flex-col items-center">
-            <li class="flex flex-col items-center">
-                <a asp-controller="Home" asp-action="Index" class="sidebar_menu_element flex">
-                    <i class="fa-solid fa-house"></i>
-                    <span>Dashboard</span>
+            <ul class="sidebar_dropdown sidebar_menu_element" onclick="OpenClose(2, this)">
+                <li class="dropdown_name iconize flex just-between">
+                    <div class="flex just-between">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Dashboard</span>
+                    </div>
+                </li>
+
+                <a asp-controller="Dashboard" asp-action="Student" class="dropdown_element">
+                    Student
                 </a>
-            </li>
+
+                <a asp-controller="Dashboard" asp-action="Mentor" class="dropdown_element">
+                    Mentor
+                </a>
+            </ul>
 
             <ul class="sidebar_dropdown sidebar_menu_element" onclick="OpenClose(2, this)">
                 <li class="dropdown_name iconize flex just-between">
@@ -51,7 +61,7 @@
             </li>
 
             <li class="flex flex-col items-center">
-                <a asp-controller="Mentor" asp-action="Index" class="sidebar_menu_element flex active_menu ">
+                <a asp-controller="Mentor" asp-action="Index" class="sidebar_menu_element flex">
                     <i class="fa-solid fa-user-tie"></i>
                     <span>Mentors</span>
                 </a>
@@ -75,43 +85,6 @@
                 <a asp-controller="Plans" asp-action="Index" class="sidebar_menu_element flex">
                     <i class="fa-solid fa-coins"></i>
                     <span>Pricing</span>
-                </a>
-            </li>
-
-            <h4 style=" margin-top: 20px;">Admin tools</h4>
-
-            <li class="flex flex-col items-center">
-                <a asp-controller="Category" asp-action="Index" class="sidebar_menu_element flex">
-                    <i class="fa-solid fa-icons"></i>
-                    <span>Categories</span>
-                </a>
-            </li>
-
-            <li class="flex flex-col items-center">
-                <a asp-controller="Course" asp-action="IndexAdmin" class="sidebar_menu_element flex">
-                    <i class="fa-solid fa-video"></i>
-                    <span>Courses</span>
-                </a>
-            </li>
-
-            <li class="flex flex-col items-center">
-                <a asp-controller="Libray" asp-action="IndexAdmin" class="sidebar_menu_element flex">
-                    <i class="fa-solid fa-book"></i>
-                    <span>Books</span>
-                </a>
-            </li>
-
-            <li class="flex flex-col items-center">
-                <a asp-controller="Mentor" asp-action="IndexAdmin" class="sidebar_menu_element flex">
-                    <i class="fa-solid fa-user-tie"></i>
-                    <span>Mentors</span>
-                </a>
-            </li>
-
-            <li class="flex flex-col items-center">
-                <a asp-controller="Student" asp-action="IndexAdmin" class="sidebar_menu_element flex">
-                    <i class="fa-solid fa-user-graduate"></i>
-                    <span>Students</span>
                 </a>
             </li>
         </ul>

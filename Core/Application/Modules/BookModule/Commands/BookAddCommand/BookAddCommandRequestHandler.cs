@@ -29,7 +29,7 @@ namespace Application.Modules.BookModule.Commands.BookAddCommand
                 PublisherId = request.PublisherId,
                 ThumbnailPath = await fileService.UploadAsync(request.Thumbnail, cancellationToken),
                 PdfPath = await fileService.UploadAsync(request.Pdf, cancellationToken),
-                AproximateReading = await aproximateReadingTimeService.GetApproximateReadingTime(request.Pdf),
+                AproximateReading = await aproximateReadingTimeService.GetApproximateReadingTimeAsync(request.Pdf),
             };
 
             await bookRepository.AddAsync(book, cancellationToken);

@@ -20,10 +20,18 @@ namespace WebUI.Controllers
 
         public async Task<IActionResult> View(int id, int orderNumber)
         {
-            Console.WriteLine(orderNumber);
             var courses = await courseService.GetByIdAsync(id);
 
-            return View(courses.Data);
+            if (courses is null || !courses.IsSuccess)
+                throw new Exception("Bad Request");
+
+            var data = new CourseViewDto
+            {
+                Data = courses.Data!,
+                OrderNumber = orderNumber,
+            };
+
+            return View(data);
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -33,15 +41,15 @@ namespace WebUI.Controllers
             return View(courses.Data);
         }
 
-        public async Task<IActionResult> CreateCourse()
+        public IActionResult CreateCourse()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateCourseRequest([FromForm] CourseAddRequestDto request)
+        public async Task<IActionResult> CreateCourse([FromForm] CourseAddRequestDto request)
         {
-            request.MentorId = 3; // TO change
+            request.MentorId = 3;
             request.CategoryId = int.Parse(Request.Form["Category"]!);
             var course = await courseService.AddAsync(request);
 

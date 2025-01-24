@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    <form asp-action="CreateCourseRequest" method="post" enctype="multipart/form-data" style="width: 100%;" name="courseForm">
+    <form asp-controller="Course" asp-action="CreateCourse" enctype="multipart/form-data" method="post" style="width: 100%;" name="courseForm">
         <div class="stage inputs flex items-center just-between" id="stage-1" style="transition: .3s all;">
             <div class="upload-box flex flex-col items-center just-center" id="uploadBox">
                 <div id="text" class="text flex flex-col items-center just-center">

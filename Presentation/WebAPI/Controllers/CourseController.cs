@@ -5,6 +5,7 @@ using Application.Modules.CourseModule.Commands.CourseEditCommand;
 using Application.Modules.CourseModule.Queries.CourseGetAllQuery;
 using Application.Modules.CourseModule.Queries.CourseGetByIdQuery;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Repositories;
 
@@ -15,7 +16,7 @@ namespace WebAPI.Controllers
     public class CourseController(IMediator mediator, ICourseRepository courseRepository) : ControllerBase
     {
         [HttpGet("{page:int:min(1)}/{size:int:min(2)}")]
-        public async Task<IActionResult> GetAll(int page, int size)
+        public async Task<IActionResult> GetAllPaged(int page, int size)
         {
             var query = courseRepository.GetAll();
 
@@ -56,7 +57,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
+        [DisableRequestSizeLimit]
         [Consumes("multipart/form-data")]
+        [Authorize("course.add")]
         public async Task<IActionResult> Add([FromForm] CourseAddCommandRequest request)
         {
             var res = await mediator.Send(request);
@@ -65,6 +68,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{id:int:min(1)}")]
+        [Authorize("course.edit")]
         public async Task<IActionResult> Edit([FromForm] CourseEditCommandRequest request, int id)
         {
             request.Id = id;
@@ -74,6 +78,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id:int:min(1)}")]
+        [Authorize("course.delete")]
         public async Task<IActionResult> Delete([FromQuery] CourseDeleteCommandRequest request, int id)
         {
             request.Id = id;

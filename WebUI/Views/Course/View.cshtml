@@ -1,4 +1,4 @@
-﻿@model CourseGetByIdResponse
+﻿@model CourseViewDto
 @{
     ViewData["Title"] = "View course";
     Layout = "_Layout";
@@ -8,28 +8,38 @@
     <link rel="stylesheet" href="~/css/view-course.css">
 }
 
-<h2>@Model.CategoryName Course</h2>
+@* @section Scripts { *@
+@*     <script> *@
+@*         function getValueAtIndex(index){ *@
+@*             var str = window.location.href; *@
+@*             return str.split("/")[index]; *@
+@*         } *@
+
+@*     </script> *@
+@* } *@
+
+<h2>@Model.Data.CategoryName Course</h2>
 
 <div class="course-box flex just-between">
     <div class="left-part flex flex-col just-center">
         <div class="heading flex items-center just-between">
             <div class="titling flex flex-col">
-                <h2 class="title">@Model.Title</h2>
-                <span class="author">By @Model.MentorName</span>
+                <h2 class="title">@Model.Data.Title</h2>
+                <span class="author">By @Model.Data.MentorName</span>
             </div>
 
-            <span class="category-tag">@Model.CategoryName</span>
+            <span class="category-tag">@Model.Data.CategoryName</span>
 
             <i class="fa-solid fa-share-nodes pointer"></i>
         </div>
         <br />
-        @await Component.InvokeAsync("AllVideos", new { id = Model.Id, orderNumber = 0})
+        @await Component.InvokeAsync("AllVideos", new { id = Model.Data.Id, orderNumber = Model.OrderNumber })
 
         <div class="description flex flex-col">
             <h4>Description</h4>
 
             <p>
-                @Model.Description
+                @Model.Data.Description
             </p>
 
         </div>
@@ -39,7 +49,7 @@
         <div class="features flex flex-col">
             <h4>Features of this course</h4>
 
-            @await Component.InvokeAsync("AllFeatures", new { id = Model.Id, isCourse = true })
+            @await Component.InvokeAsync("AllFeatures", new { id = Model.Data.Id, isCourse = true })
         </div>
 
         <div class="line"></div>
@@ -48,43 +58,18 @@
             <h4>Author of course</h4>
 
             <div class="mentor-profile flex items-center">
-                <img style="width: 40px; height: 40px; object-fit: cover;" src="@Model.MentorProfilePath" alt="profile">
+                <img style="width: 40px; height: 40px; object-fit: cover;" src="@Model.Data.MentorProfilePath" alt="profile">
 
                 <div class="username flex flex-col">
-                    <a class="pointer link">@Model.MentorName </a>
-                    <span>@Model.CategoryName</span> @*<--- ~NOTICE~ CHANGE TO MENTOR CATEGORY*@
+                    <a class="pointer link">@Model.Data.MentorName </a>
+                    <span>@Model.Data.CategoryName</span> @*<--- ~NOTICE~ CHANGE TO MENTOR CATEGORY*@
                 </div>
             </div>
         </div>
     </div>
 
     <div class="right-part flex flex-col">
-        <div class="video-sequence flex flex-col items-center">
-            <div class="video pointer flex just-between items-center">
-                <h3>
-                    Introduction
-                </h3>
-                <i class="fa-solid fa-angle-right"></i>
-            </div>
-            <div class="video pointer flex just-between items-center">
-                <h3>
-                    Beginner tips
-                </h3>
-                <i class="fa-solid fa-angle-right"></i>
-            </div>
-            <div class="video pointer flex just-between items-center">
-                <h3>
-                    Advanced tips
-                </h3>
-                <i class="fa-solid fa-angle-right"></i>
-            </div>
-            <div class="video pointer flex just-between items-center">
-                <h3>
-                    Tasks
-                </h3>
-                <i class="fa-solid fa-angle-right"></i>
-            </div>
-        </div>
+        @await Component.InvokeAsync("AllVideoTitles", new { id = Model.Data.Id, currentOrderNum = Model.OrderNumber })
 
         @*
         <div class="comments-box flex flex-col items-center just-center">

@@ -13,7 +13,8 @@ namespace Application.Modules.CourseModule.Commands.CourseAddCommand
         IMentorRepository mentorRepository,
         IAttachmentRepository attachmentRepository,
         IVideoRepository videoRepository,
-        IFileService fileService) : IRequestHandler<CourseAddCommandRequest, Course>
+        IFileService fileService,
+        IAproximateTimeService aproximateTimeService) : IRequestHandler<CourseAddCommandRequest, Course>
     {
         public async Task<Course> Handle(CourseAddCommandRequest request, CancellationToken cancellationToken)
         {
@@ -37,7 +38,7 @@ namespace Application.Modules.CourseModule.Commands.CourseAddCommand
                 MentorId = request.MentorId,
                 Rating = 0,
                 ThumbnailPath = imagePath,
-                Duration = 165
+                Duration = await aproximateTimeService.GetVideoDurationAsync(request.Video)
             };
 
 
@@ -57,7 +58,8 @@ namespace Application.Modules.CourseModule.Commands.CourseAddCommand
             { 
                 Title = request.Title,
                 CourseId = courseId,
-                VideoPath = await fileService.UploadAsync(request.Video)
+                VideoPath = await fileService.UploadAsync(request.Video),
+                Duration = await aproximateTimeService.GetVideoDurationAsync(request.Video)
             };
 
 

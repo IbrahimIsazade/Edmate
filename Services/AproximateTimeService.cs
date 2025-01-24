@@ -18,7 +18,7 @@ namespace Services
             return words.Length;
         }
 
-        public async Task<int> GetApproximateReadingTime(IFormFile file)
+        public async Task<int> GetApproximateReadingTimeAsync(IFormFile file)
         {
             if (file == null || file.Length == 0)
                 throw new ArgumentException("File is empty or null.");
@@ -35,7 +35,7 @@ namespace Services
             return (int)Math.Ceiling((double)wordCount / averageReadingSpeed);
         }
 
-        public async Task<int> GetVideoDuration(IFormFile videoFile)
+        public async Task<int> GetVideoDurationAsync(IFormFile videoFile)
         {
             if (videoFile == null || videoFile.Length == 0)
                 throw new ArgumentException("Video file is empty or null.");

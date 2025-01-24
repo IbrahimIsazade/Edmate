@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<CategoryDto>
 
-<select name="Category">
-    <option disabled selected value="Category">Select category</option>
+<select class="form-select form-select-md mb-3" name="Category">
+    <option selected disabled value="none">Select category</option>
     @foreach (var item in Model)
     {
         <option value="@item.Id">@item.Name</option>
