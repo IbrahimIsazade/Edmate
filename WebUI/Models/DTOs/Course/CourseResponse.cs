@@ -11,6 +11,7 @@
         public required int MentorId { get; set; }
         public required decimal Rating { get; set; }
         public required string ThumbnailPath { get; set; }
+        public required string LessonsCount { get; set; }
         public required int Duration { get; set; } // int represents minutes. FE: 200 -> 2h 20m
     }
     public class CourseGetByIdResponse

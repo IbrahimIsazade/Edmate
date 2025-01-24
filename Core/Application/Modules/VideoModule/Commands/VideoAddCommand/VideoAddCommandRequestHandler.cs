@@ -10,7 +10,7 @@ namespace Application.Modules.VideoModule.Commands.VideoAddCommand
     internal class VideoAddCommandRequestHandler(
         IVideoRepository videoRepository,
         ICourseRepository courseRepository,
-        //IAproximateTimeService aproximateTimeService,
+        IAproximateTimeService aproximateTimeService,
         IFileService fileService) : IRequestHandler<VideoAddCommandRequest, Video>
     {
         public async Task<Video> Handle(VideoAddCommandRequest request, CancellationToken cancellationToken)
@@ -31,12 +31,17 @@ namespace Application.Modules.VideoModule.Commands.VideoAddCommand
                 Title = !String.IsNullOrWhiteSpace(request.Title) ? request.Title : throw new ArgumentNullException("Title is null"),
                 VideoPath = await fileService.UploadAsync(request.Video),
                 CourseId = request.CourseId,
-                Duration = /*await aproximateTimeService.GetVideoDuration(request.Video)*/ 1,
+                Duration = await aproximateTimeService.GetVideoDurationAsync(request.Video),
                 OrderNumber = !videosOfCourse.Any() ? 1 : videosOfCourse.Last() + 1
             };
 
+            course.Duration += entity.Duration;
+
             await videoRepository.AddAsync(entity, cancellationToken);
             await videoRepository.SaveAsync(cancellationToken);
+
+            courseRepository.Edit(course);
+            await courseRepository.SaveAsync(cancellationToken);
 
             return entity;
         }

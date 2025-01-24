@@ -1,0 +1,121 @@
+﻿@model VideoRequestDto
+
+@{
+    ViewData["Title"] = "Add Video";
+    Layout = "_AreaLayout";
+}
+
+@section Scripts {
+    <script defer>
+        videoUpload.addEventListener('change', function () {
+            const file = this.files[0];
+
+            if (file && file.size < 1_073_741_824) {
+                var reader = new FileReader();
+                const videoText = document.getElementById('videoText');
+                const loadingText = document.getElementById('loadingText'); // Ensure this element exists in your HTML
+
+                reader.onload = function (e) {
+                    videoText.innerHTML = `
+                <video id="video-tag" class="" style="box-shadow: 0px 0px 10px lightgrey; border-radius: 10px; width: 300px; height: 250px; display: none;">
+                <source id="video-source">
+                Your browser does not support the video tag.
+                </video>`;
+
+                    const videoSrc = document.querySelector("#video-source");
+                    const videoTag = document.querySelector("#video-tag");
+
+                    loadingText.style.display = "flex"; // Show the loading text
+                    videoTag.style.display = 'flex';
+                    videoSrc.src = e.target.result;
+
+                    videoTag.load(); // Start loading the video
+
+                    // Listen for the `loadeddata` event
+                    videoTag.addEventListener('loadeddata', function () {
+                        loadingText.style.display = "none"; // Hide the loading text
+                    });
+
+                    // Optional: Handle errors
+                    videoTag.addEventListener('error', function () {
+                        loadingText.style.display = "none";
+                        alert("Error loading video");
+                    });
+                }.bind(this);
+
+                reader.readAsDataURL(file);
+            } else {
+                text.innerHTML = "File is too big ⚠️";
+            }
+        });
+    </script>
+}
+
+@section PageCss {
+    <style>
+        .upload-box {
+            width: 300px;
+            height: 250px;
+            border: 2px solid #C5D9FD;
+            background-color: #ECF2FE;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: 0.2s all;
+        }
+
+            .upload-box:hover {
+                background-color: #e1ebff;
+            }
+
+            .upload-box .text {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+
+            .upload-box input {
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+            }
+
+            .upload-box #preview {
+                position: absolute;
+                -o-object-fit: scale-down;
+                object-fit: scale-down;
+                width: 95%;
+                height: 95%;
+                opacity: 0;
+            }
+    </style>
+}
+
+<div class="conatiner-fluid content-inner mt-n5 py-0">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Courses</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Add" asp-controller="Video" asp-area="" asp-route-id="@Model.CourseId" method="post" enctype="multipart/form-data" style="width: 100%;" name="courseForm">
+                        <div class="mb-3">
+                            <label for="videotitle" class="form-label">Title</label>
+                            <input asp-for="Title" type="text" class="form-control" id="videotitle">
+                        </div>
+                        <div class="mb-3">
+                            <label for="video" class="form-label">Video</label>
+                            <input asp-for="Video" type="file"  accept="video/*" class="form-control" id="video">
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Submit" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

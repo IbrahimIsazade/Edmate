@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebUI.Models.DTOs.Course;
+using WebUI.Models.DTOs.Video;
 using WebUI.Services.Course;
 
 namespace WebUI.Areas.Admin.Controllers
@@ -29,8 +30,17 @@ namespace WebUI.Areas.Admin.Controllers
                 return RedirectToAction("WentWrong", "Error");
 
             return View(response.Data);
-        }
+        }   
+        
+        public async Task<IActionResult> AddVideo(int id)
+        {
+            var data = new VideoRequestDto
+            {
+                CourseId = id,
+            };
 
+            return View(data);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Edit([FromForm] CourseEditDto request, int id)
