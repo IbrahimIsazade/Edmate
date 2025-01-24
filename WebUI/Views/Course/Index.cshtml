@@ -22,9 +22,7 @@
                     var durationInHours = Math.Round(item.Duration / 60.0, 1);
 
                     <div class="course-card flex flex-col just-between items-center">
-                        <div class="thumbnail flex items-center just-center">
-                            <img src="@item.ThumbnailPath" alt="course-img">
-                        </div>
+                        <div style="background-image:url(@item.ThumbnailPath); background-size: cover; box-shadow: 0px 0px 10px #BBBBBB" class="thumbnail flex items-center just-center"> </div>
 
                         <div class="categories flex items-center">
                             <span class="category">@item.CategoryName</span> @*<--- bu bir section olacaq hardaki butun kateqoriyalari gormek olcaq*@
@@ -35,8 +33,8 @@
                         </div>
 
                         <div class="author flex items-center">
-                            <img src="@item.MentorProfilePath" alt="">
-                            <span>Created by <b><a class="author-link" href="profile" style="transition: .2s all;">@item.MentorName</a></b></span>
+                            <img style="object-fit: cover; width:30px; height:30px;" src="@item.MentorProfilePath" alt="">
+                            <span>Author <b><a class="author-link" href="profile" style="transition: .2s all;">@item.MentorName</a></b></span>
                         </div>
 
                         <div class="line"></div>
@@ -64,7 +62,9 @@
             </div>
         </div>
 
-        <div class="course-box flex flex-col just-between" style="height: @{((((Model.Count() - 1) % 4) + 1) * 500).ToString();}px;">
+        <div class="course-box flex flex-col just-between" style="height: @{
+                ((((Model.Count() - 1) % 4) + 1) * 500).ToString();
+            }px;">
             <!--
             yuxarida, kurslarin sayini 4'e bolub onu 500'e vur ve height ver (4 dene kurs -> 500px, 5 dene kurs -> 1000px)
             Bunun ucun ChatGPT verdiyi bir Python kod:
@@ -96,9 +96,7 @@
                     var durationInHours = Math.Round(item.Duration / 60.0, 1);
 
                     <div class="course-card flex flex-col just-between items-center">
-                        <div class="thumbnail flex items-center just-center">
-                            <img src="@item.ThumbnailPath" alt="course-img">
-                        </div>
+                        <div style="background-image:url(@item.ThumbnailPath); background-size: cover; box-shadow: 0px 0px 10px #BBBBBB" class="thumbnail flex items-center just-center"> </div>
 
                         <div class="categories flex items-center">
                             <span class="category">@item.CategoryName</span> @*<--- bu bir section olacaq hardaki butun kateqoriyalari gormek olcaq*@
@@ -109,8 +107,21 @@
                         </div>
 
                         <div class="author flex items-center">
-                            <img src="@item.MentorProfilePath" alt="">
-                            <span>Created by <b><a class="author-link" href="profile" style="transition: .2s all;">@item.MentorName</a></b></span>
+                            <img style="object-fit: cover; width:30px; height:30px;" src="@item.MentorProfilePath" alt="">
+                            <span>
+                                Author <b>
+                                    <a class="author-link" href="profile" style="transition: .2s all;">
+                                        @{
+                                            string mentorName = item.MentorName;
+                                            if (item.MentorName.Length > 15)
+                                            {
+                                                mentorName = new string(item.MentorName.Take(13).ToArray()).ToString() + "...";
+                                            }
+
+                                        } @mentorName
+                                    </a>
+                                </b>
+                            </span>
                         </div>
 
                         <div class="line"></div>
