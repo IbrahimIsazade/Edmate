@@ -1,0 +1,63 @@
+﻿@model BookResponseDto
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    ViewData["Title"] = "Edit course";
+    Layout = "_Layout";
+}
+
+@section PageCss {
+    <link rel="stylesheet" href="~/css/view-course.css">
+
+    <style>
+        .swal2-x-mark {
+            margin-left: 0;
+        }
+
+            .swal2-x-mark span {
+                margin-left: 0;
+            }
+    </style>
+}
+
+<form asp-action="Edit" asp-controller="Book" asp-route-id="@Model.Id" method="post">
+    <input type="text" name="Title" value="@Model.Title" />
+    <input type="text" name="Description" value="@Model.Description" />
+    @await Component.InvokeAsync("AllCategories")
+    <br />
+    @await Component.InvokeAsync("AllFeatures", new { id = Model.Id, isCourse = false })
+    <a asp-controller="Feature" asp-route-id="@Model.Id" asp-route-boolean="False" asp-action="Add">Add</a>
+    <br />
+    <input type="submit" value="Edit" />
+</form>
+
+<style>
+    .continue {
+        width: 100px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background-color: #3479f9;
+        color: white;
+        border-radius: 20px;
+        transition: .4s all;
+        cursor: pointer;
+    }
+
+        .continue:hover {
+            background-color: #1466ff;
+            color: white;
+        }
+
+    video {
+        width: auto;
+        height: 200px;
+    }
+
+    ::-webkit-media-controls {
+        display: none;
+    }
+</style>

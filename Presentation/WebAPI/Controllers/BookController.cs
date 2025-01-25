@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{id:int:min(1)}")]
-        public async Task<IActionResult> Edit([FromForm] BookEditCommandRequest request, int id)
+        public async Task<IActionResult> Edit(BookEditCommandRequest request, int id)
         {
             request.Id = id;
             var res = await mediator.Send(request);
@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id:int:min(1)}")]
-        public async Task<IActionResult> Delete([FromQuery] BookDeleteCommandRequest request, int id)
+        public async Task<IActionResult> Delete(BookDeleteCommandRequest request, int id)
         {
             request.Id = id;
             await mediator.Send(request);

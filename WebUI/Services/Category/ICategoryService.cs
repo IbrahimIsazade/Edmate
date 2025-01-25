@@ -1,4 +1,5 @@
 ﻿using WebUI.Models.common;
+using WebUI.Models.DTOs.Book;
 using WebUI.Models.DTOs.Category;
 
 namespace WebUI.Services.Category

@@ -1,4 +1,4 @@
-﻿@model CourseGetByIdResponse
+﻿@model CategoryDto
 @{
     Layout = "_AreaLayout";
 }
@@ -15,20 +15,9 @@
                 <div class="card-body">
                     <form asp-action="Edit" asp-area="Admin" asp-route-id="@Model.Id" method="post">
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Title</label>
-                            <input asp-for="Title" type="text" class="form-control" id="exampleInputEmail1" value="@Model.Title">
+                            <label for="exampleInputEmail1" class="form-label">Name</label>
+                            <input asp-for="Name" type="text" class="form-control" id="exampleInputEmail1" value="@Model.Name">
                         </div>
-                        <div class="input-group">
-                            <textarea asp-for="Description" class="form-control">@Model.Description</textarea>
-                        </div>
-                        <br />
-                        <div class="mb-3">
-                            @await Component.InvokeAsync("AllCategories")
-                        </div>
-
-                        <a asp-action="AddVideo" asp-route-id="@Model.Id">
-                            <div class="btn btn-primary">Add video</div>
-                        </a> 
 
                         <input type="submit" class="btn btn-primary" value="Save" />
                     </form>

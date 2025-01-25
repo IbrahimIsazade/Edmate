@@ -1,4 +1,4 @@
-﻿@model CourseGetByIdResponse
+﻿@model BookResponseDto
 @{
     Layout = "_AreaLayout";
 }
@@ -21,14 +21,10 @@
                         <div class="input-group">
                             <textarea asp-for="Description" class="form-control">@Model.Description</textarea>
                         </div>
-                        <br />
+
                         <div class="mb-3">
                             @await Component.InvokeAsync("AllCategories")
                         </div>
-
-                        <a asp-action="AddVideo" asp-route-id="@Model.Id">
-                            <div class="btn btn-primary">Add video</div>
-                        </a> 
 
                         <input type="submit" class="btn btn-primary" value="Save" />
                     </form>

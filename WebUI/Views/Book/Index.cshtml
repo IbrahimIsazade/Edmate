@@ -1,12 +1,12 @@
-﻿@model IEnumerable<CourseGetAllResponse>
+﻿@model IEnumerable<BookResponseDto>
 @{
-    ViewData["Title"] = "Courses";
+    ViewData["Title"] = "Books";
 }
 @section PageCss {
     <link rel="stylesheet" href="~/css/courses.css">
 }
 
-<h2>Courses </h2>
+<h2>Books </h2>
 
 <div class="box flex flex-col items-center">
     <div class="boxes flex flex-col items-center">
@@ -19,7 +19,7 @@
             <div class="courses popular-courses flex items-center just-around">
                 @foreach (var item in Model)
                 {
-                    var durationInHours = Math.Round(item.Duration / 60.0, 1);
+                    var durationInHours = Math.Round(item.AproximateReading / 60.0, 1);
 
                     <div class="course-card flex flex-col just-between items-center">
                         <div style="background-image:url(@item.ThumbnailPath); background-size: cover; box-shadow: 0px 0px 10px #BBBBBB" class="thumbnail flex items-center just-center"> </div>
@@ -33,20 +33,16 @@
                         </div>
 
                         <div class="author flex items-center">
-                            <img style="object-fit: cover; width:30px; height:30px;" src="@item.MentorProfilePath" alt="">
-                            <span>Author <b><a class="author-link" href="profile" style="transition: .2s all;">@item.MentorName</a></b></span>
+                            <img style="object-fit: cover; width:30px; height:30px;" src="@item.PubllisherProfilePath" alt="">
+                            <span>Author <b><a class="author-link" href="profile" style="transition: .2s all;">@item.PublisherName</a></b></span>
                         </div>
 
                         <div class="line"></div>
 
                         <div class="details flex items-center">
-                            <div class="lessons detail flex items-center just-center">
-                                <i class="fa-solid fa-video"></i>
-                                <span>@item.LessonsCount Lessons</span>
-                            </div>
                             <div class="duration detail flex items-center just-center" style="margin-left: 20px;">
                                 <i class="fa-solid fa-clock"></i>
-                                <span>@durationInHours Hours</span>
+                                <span>@item.AproximateReading Hours</span>
                             </div>
                         </div>
 
@@ -55,30 +51,30 @@
                                 <i class="fa-solid fa-star"></i>
                                 <span>5.0 (1)</span>
                             </div>
-                            <a asp-action="View" asp-route-id="@item.Id" asp-route-orderNumber="0" class="view-course pointer">View course</a>
+                            <a asp-action="View" asp-route-id="@item.Id" class="view-course pointer">View book</a>
                         </div>
                     </div>
                 }
+                </div>
             </div>
-        </div>
 
-        <div class="course-box flex flex-col just-between" style="height: @{
+            <div class="course-box flex flex-col just-between" style="height: @{
                 ((((Model.Count() - 1) % 4) + 1) * 500).ToString();
             }px;">
-            <!--
-            yuxarida, kurslarin sayini 4'e bolub onu 500'e vur ve height ver (4 dene kurs -> 500px, 5 dene kurs -> 1000px)
-            Bunun ucun ChatGPT verdiyi bir Python kod:
-            interval = (x - 1) // 4
-            y = 500 * (interval + 1)
-            -->
-            <div class="top flex items-center just-between" style="width: 100%;">
-                <h2 class="title">All Courses<span style="font-size: 12px;font-weight: 500;">(this year)</span></h2>
-            </div>
+                <!--
+                yuxarida, kurslarin sayini 4'e bolub onu 500'e vur ve height ver (4 dene kurs -> 500px, 5 dene kurs -> 1000px)
+                Bunun ucun ChatGPT verdiyi bir Python kod:
+                interval = (x - 1) // 4
+                y = 500 * (interval + 1)
+                -->
+                <div class="top flex items-center just-between" style="width: 100%;">
+                    <h2 class="title">All Courses<span style="font-size: 12px;font-weight: 500;">(this year)</span></h2>
+                </div>
 
-            <div class="courses all-courses flex flex-col just-between">
-                @foreach (var item in Model)
+                <div class="courses all-courses flex flex-col just-between">
+                    @foreach (var item in Model)
                 {
-                    var durationInHours = Math.Round(item.Duration / 60.0, 1);
+                    var durationInHours = Math.Round(item.AproximateReading / 60.0, 1);
 
                     <div class="course-card flex flex-col just-between items-center">
                         <div style="background-image:url(@item.ThumbnailPath); background-size: cover; box-shadow: 0px 0px 10px #BBBBBB" class="thumbnail flex items-center just-center"> </div>
@@ -92,15 +88,15 @@
                         </div>
 
                         <div class="author flex items-center">
-                            <img style="object-fit: cover; width:30px; height:30px;" src="@item.MentorProfilePath" alt="">
+                            <img style="object-fit: cover; width:30px; height:30px;" src="@item.PubllisherProfilePath" alt="">
                             <span>
                                 Author <b>
                                     <a class="author-link" href="profile" style="transition: .2s all;">
                                         @{
-                                            string mentorName = item.MentorName;
-                                            if (item.MentorName.Length > 15)
+                                            string mentorName = item.PublisherName;
+                                            if (item.PublisherName.Length > 15)
                                             {
-                                                mentorName = new string(item.MentorName.Take(13).ToArray()).ToString() + "...";
+                                                mentorName = new string(item.PublisherName.Take(13).ToArray()).ToString() + "...";
                                             }
 
                                         } @mentorName
@@ -112,13 +108,9 @@
                         <div class="line"></div>
 
                         <div class="details flex items-center">
-                            <div class="lessons detail flex items-center just-center">
-                                <i class="fa-solid fa-video"></i>
-                                <span>@item.LessonsCount Lessons</span>
-                            </div>
                             <div class="duration detail flex items-center just-center" style="margin-left: 20px;">
                                 <i class="fa-solid fa-clock"></i>
-                                <span>@durationInHours Hours</span>
+                                <span>@item.AproximateReading Hours</span>
                             </div>
                         </div>
 
@@ -127,7 +119,7 @@
                                 <i class="fa-solid fa-star"></i>
                                 <span>5.0 (1)</span>
                             </div>
-                            <a asp-action="View" asp-route-id="@item.Id" asp-route-orderNumber="0" class="view-course pointer">View course</a>
+                            <a asp-action="View" asp-route-id="@item.Id" class="view-course pointer">View course</a>
                         </div>
                     </div>
                 }

@@ -20,16 +20,28 @@ namespace Application.Modules.FeatureModule.Commands.AddCommand
                 IsCourseFeature = request.IsCourse,
             };
 
-            if (await courseRepository.GetAsync(m => m.Id == request.ItemId, cancellationToken) != null
-                || await bookRepository.GetAsync(m => m.Id == request.ItemId, cancellationToken) != null)
+            if (request.IsCourse)
             {
-                await featureRepository.AddAsync(entity, cancellationToken);
-                await featureRepository.SaveAsync(cancellationToken);
+                if (await courseRepository.GetAsync(m => m.Id == request.ItemId, cancellationToken) != null)
+                {
+                    await featureRepository.AddAsync(entity, cancellationToken);
+                    await featureRepository.SaveAsync(cancellationToken);
 
-                return entity;
+                    return entity;
+                }
+            }
+            else
+            {
+                if (await bookRepository.GetAsync(m => m.Id == request.ItemId, cancellationToken) != null)
+                {
+                    await featureRepository.AddAsync(entity, cancellationToken);
+                    await featureRepository.SaveAsync(cancellationToken);
+
+                    return entity;
+                }
             }
 
-            throw new NotFoundException("Entity not found (Handler)");
+            throw new NotImplementedException();
         }
     }
 }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using WebUI.Binders.BooleanBinder;
 using WebUI.Services.Account;
+using WebUI.Services.Book;
 using WebUI.Services.Category;
 using WebUI.Services.Comment;
 using WebUI.Services.common;
@@ -32,6 +33,7 @@ namespace WebUI
             builder.Services.AddSingleton<IAccountService, AccountService>();
             builder.Services.AddSingleton<IVideoService, VideoService>();
             builder.Services.AddSingleton<IFeatureService, FeatureService>();
+            builder.Services.AddSingleton<IBookService, BookService>();
             builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             builder.Services.AddHttpContextAccessor();
 

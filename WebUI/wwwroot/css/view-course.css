@@ -145,6 +145,7 @@
                 padding: 20px;
                 border-bottom: 1px solid lightgrey;
                 transition: 0.2s all;
+                color: black;
             }
 
                 .main .course-box .right-part .video-sequence .video h3 {
@@ -156,10 +157,12 @@
                 }
 
                 .main .course-box .right-part .video-sequence .video:hover {
-                    color: #3479F9;
+                    color: #3479F9 !important;
                     background-color: #dae7ff;
                     scale: 1.05;
                 }
+
+
 
         .main .course-box .right-part .comments-box {
             background-color: white;

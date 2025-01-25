@@ -39,7 +39,7 @@ namespace WebUI.Controllers
             if (response is null)
                 throw new NullReferenceException();
 
-            return RedirectToAction("Edit", "Course", new { id });
+            return RedirectToAction("Student", "Dashboard");
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿@model CourseViewDto
+﻿@model BookResponseDto
 @{
-    ViewData["Title"] = "View course";
+    ViewData["Title"] = "View book";
     Layout = "_Layout";
 }
 
@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="~/css/view-course.css">
 }
 
- @section Scripts {
-     <script>
+@section Scripts {
+    <script>
         function downloadFile(url, filename) {
             const a = document.createElement('a');
             a.href = url;
@@ -19,31 +19,30 @@
             document.body.removeChild(a);
         }
 
-     </script>
- }
+    </script>
+}
 
-<h2>@Model.Data.CategoryName Course</h2>
+<h2>@Model.CategoryName Book</h2>
 
 <div class="course-box flex just-between">
     <div class="left-part flex flex-col just-center">
         <div class="heading flex items-center just-between">
             <div class="titling flex flex-col">
-                <h2 class="title">@Model.Data.Title</h2>
-                <span class="author">By @Model.Data.MentorName</span>
+                <h2 class="title">@Model.Title</h2>
+                <span class="author">By @Model.PublisherName</span>
             </div>
 
-            <span class="category-tag">@Model.Data.CategoryName</span>
+            <span class="category-tag">@Model.CategoryName</span>
 
             <i class="fa-solid fa-share-nodes pointer"></i>
         </div>
         <br />
-        @await Component.InvokeAsync("AllVideos", new { id = Model.Data.Id, orderNumber = Model.OrderNumber })
 
         <div class="description flex flex-col">
             <h4>Description</h4>
 
             <p>
-                @Model.Data.Description
+                @Model.Description
             </p>
 
         </div>
@@ -53,29 +52,28 @@
         <div class="features flex flex-col">
             <h4>Features of this course</h4>
 
-            @await Component.InvokeAsync("AllFeatures", new { id = Model.Data.Id, isCourse = true })
+            @await Component.InvokeAsync("AllFeatures", new { id = Model.Id, isCourse = false })
         </div>
 
         <div class="line"></div>
 
-        <a href="@Model.Data.AttachmentPath" oclick="downloadFile(@Model.Data.AttachmentPath, 'Attachment')" download="Attachment">Click</a>
+        <a href="@Model.PdfPath" download="Attachment">Click</a>
 
         <div class="author flex flex-col">
             <h4>Author of course</h4>
 
             <div class="mentor-profile flex items-center">
-                <img style="width: 40px; height: 40px; object-fit: cover;" src="@Model.Data.MentorProfilePath" alt="profile">
+                <img style="width: 40px; height: 40px; object-fit: cover;" src="@Model.PubllisherProfilePath" alt="profile">
 
                 <div class="username flex flex-col">
-                    <a class="pointer link">@Model.Data.MentorName </a>
-                    <span>@Model.Data.CategoryName</span> @*<--- ~NOTICE~ CHANGE TO MENTOR CATEGORY*@
+                    <a class="pointer link">@Model.PublisherName </a>
+                    <span>@Model.CategoryName</span> @*<--- ~NOTICE~ CHANGE TO MENTOR CATEGORY*@
                 </div>
             </div>
         </div>
     </div>
 
     <div class="right-part flex flex-col">
-        @await Component.InvokeAsync("AllVideoTitles", new { id = Model.Data.Id, currentOrderNum = Model.OrderNumber })
 
         @*
         <div class="comments-box flex flex-col items-center just-center">

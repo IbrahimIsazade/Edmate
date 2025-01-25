@@ -15,13 +15,13 @@ namespace Application.Modules.BookModule.Commands.BookEditCommand
             if (entity == null)
                 throw new NotFoundException("Book not found");
 
-            if (request.Thumbnail != null)
-            {
-                entity.ThumbnailPath = fileService.UploadAsync(request.Thumbnail).ToString()!;
-            }
-
             entity.Title = request.Title;
             entity.Description = request.Description;
+            if (request.CategoryId != 0)
+                entity.CategoryId = request.CategoryId;
+
+            bookRepository.Edit(entity);
+            await bookRepository.SaveAsync(cancellationToken);
 
             return entity;
         }

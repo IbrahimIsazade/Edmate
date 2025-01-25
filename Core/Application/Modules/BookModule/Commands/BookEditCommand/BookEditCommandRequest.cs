@@ -10,6 +10,6 @@ namespace Application.Modules.BookModule.Commands.BookEditCommand
         public string Title { get; set; }
         public string Description { get; set; }
         public int CategoryId { get; set; }
-        public IFormFile? Thumbnail { get; set; }
+
     }
 }

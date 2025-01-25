@@ -1,0 +1,52 @@
+﻿@model IEnumerable<VideoDto>
+@{
+    Layout = "_AreaLayout";
+}
+
+<div class="conatiner-fluid content-inner mt-n5 py-0">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Videos</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="datatable" class="table table-striped" data-toggle="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Preview</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>
+                                            <video style=" width: 192px; height: 108px; border-radius: 5px;">
+                                                <source src="@item.VideoPath" type="video/mp4" />
+                                            </video>
+                                        </td>
+
+                                        <td>
+                                            <form asp-action="Remove" asp-route-id="@item.Id" method="post">
+                                                <button class="btn btn-danger">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
